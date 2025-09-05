@@ -1,0 +1,16 @@
+import { useEffect } from "react";
+export default function AnalyticsPanel() {
+  useEffect(() => {
+    if (window.Chart) {
+      const ctx = document.getElementById('analyticsChart').getContext('2d');
+      new window.Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+          datasets: [{ label: 'Visitors', data: [120,180,150,200,170,250,300], backgroundColor: '#5a61ff' }]
+        }
+      });
+    }
+  }, []);
+  return <canvas id="analyticsChart" width="350" height="160"></canvas>;
+}
