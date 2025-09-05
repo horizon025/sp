@@ -6,14 +6,604 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Modern Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Inter:400,600,900|Poppins:400,600,900&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico" />
+  <!-- Favicon -->
+  <link rel="icon" href="https://img.icons8.com/color/96/000000/horizon.png" />
   <meta name="description" content="horizon PLUS - The most beautiful and advanced news, blog, study, workshop, and earning platform.">
   <meta name="keywords" content="horizon PLUS, News, Blog, Study, Workshop, Sports, Competition, Board, Earning, Professional, Modern">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --main1: #5a61ff;
+      --main2: #892be2;
+      --main3: #141f38;
+      --main4: #e8e9fd;
+      --main5: #fdfcff;
+      --main-gradient: linear-gradient(90deg, #5a61ff 0%, #892be2 100%);
+      --sidebar-gradient: linear-gradient(180deg, #343a6e 0%, #232949 100%);
+      --accent: #ffb92b;
+      --danger: #ff4173;
+      --success: #30d158;
+      --font-main: 'Inter', 'Poppins', Arial, sans-serif;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-main);
+      background: var(--main4);
+      color: var(--main3);
+      min-height: 100vh;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: var(--sidebar-gradient);
+      position:fixed;
+      top:0; left:0;
+      height:100vh;
+      overflow-y:auto;
+      box-shadow: 2px 0 16px rgba(30,25,60,0.11);
+      display:flex; flex-direction:column; justify-content:space-between;
+      z-index:100;
+      transition: width 0.18s;
+    }
+    .sidebar .slide, .sidebar .slide-parent {
+      padding:14px 20px 14px 32px;
+      color:#fff;
+      font-size:17px;
+      font-weight:600;
+      cursor:pointer;
+      border:none;
+      background:none;
+      outline:none;
+      border-radius:0 2em 2em 0;
+      margin:2px 0;
+      text-align:left;
+      transition:background 0.18s;
+      letter-spacing:.6px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .sidebar .slide:hover, .sidebar .slide-parent:hover {background:rgba(255,255,255,0.08);}
+    .sidebar .active-slide {background:var(--main-gradient); color: #fff;}
+    .slide-parent .arrow {
+      margin-left:auto; transition: transform 0.23s;
+    }
+    .slide-parent.expanded .arrow {transform:rotate(90deg);}
+    .sidebar .slide-group {background:none; margin-left:10px;}
+    .sidebar .slide-group .slide {font-size:15px; padding-left:44px;}
+    .sidebar .slide.settings {margin:18px 0 8px 0; background:var(--main-gradient);}
+    /* Logo */
+    .logo {
+      font-size:38px;
+      font-weight:900;
+      font-family:'Poppins', 'Inter', sans-serif;
+      letter-spacing:1px;
+      text-align:center;
+      background:var(--main-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin:28px 0 8px 0;
+      display:flex; flex-direction:column; align-items:center; gap:5px;
+      user-select:none;
+    }
+    .logo .plus {
+      font-size:19px;
+      font-weight:900;
+      letter-spacing:2.4px;
+      background: linear-gradient(90deg, #ffb92b 0%, #5a61ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family:'Poppins',sans-serif;
+    }
+    /* Main Content */
+    .main-content {
+      margin-left:260px;
+      padding:30px 10px 70px 10px;
+      min-height:100vh;
+      transition:margin 0.2s;
+    }
+    /* Nav Row */
+    .nav-row {
+      display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:18px;
+    }
+    .nav-btn {
+      padding:13px 30px;
+      font-size:17px;
+      color:white;
+      background:var(--main-gradient);
+      border:none; border-radius:23px;
+      cursor:pointer; text-decoration:none;
+      font-weight:600;
+      box-shadow:0 2px 10px rgba(60,40,120,0.04);
+      transition:background .19s,transform .15s;
+    }
+    .nav-btn:hover {background:linear-gradient(90deg,#5a61ff 30%,#ffb92b 100%);}
+    /* Search Bar */
+    .search-bar-wrap {display:flex; justify-content:center; margin-bottom:18px;}
+    .search-bar {
+      width:340px; max-width:95vw;
+      padding:11px 16px;
+      border-radius:22px;
+      border:1.5px solid #b6baff;
+      font-size:16px;
+      background:#fff;
+      box-shadow:0 2px 10px rgba(90,97,255,0.04);
+      outline:none;
+      transition:border 0.2s;
+    }
+    .search-bar:focus {border:1.5px solid var(--main1);}
+    /* Section Title */
+    .section-title {
+      font-size:22px; margin-bottom:15px; color:var(--main3); font-weight:800;
+    }
+    /* Posts */
+    .post-list { display:flex; flex-direction:column; gap:18px;}
+    .blog-post {
+      background:#fff;
+      padding:20px 18px 18px 18px;
+      border-radius:13px;
+      box-shadow:0 2px 14px rgba(90,97,255,0.07);
+      position:relative;
+      font-family: var(--font-main);
+      transition:box-shadow .2s;
+    }
+    .blog-post:hover {box-shadow:0 6px 32px rgba(90,97,255,0.16);}
+    .blog-post h4 { font-size:20px; margin:0 0 8px 0; color:var(--main1); font-weight:700;}
+    .blog-post p { font-size:15px; color:#444; margin:0 0 7px 0;}
+    .blog-post img { width:100%; max-width:360px; max-height:160px; object-fit:cover; border-radius:8px; margin-bottom:7px; }
+    .blog-post .category-tag {
+      display:inline-block; font-size:13px;
+      background:var(--main-gradient);
+      color:#fff;
+      border-radius:9px;
+      padding:3px 14px 2px 14px;
+      margin-bottom:7px; margin-right:7px;
+      font-weight:600;
+      letter-spacing:.3px;
+    }
+    .blog-post .meta-tags {font-size:13px; color:#8668e5; margin-bottom:5px;}
+    .blog-post .post-links {margin-top:5px;}
+    .blog-post .post-links a {color:var(--main1); text-decoration:underline; margin-right:8px; font-size:13px;}
+    .blog-post .translate {position:absolute; top:18px; right:18px; background:var(--main-gradient); color:#fff; border:none; border-radius:11px; padding:3px 13px; cursor:pointer; font-size:13px;}
+    /* Rich Text Toolbar */
+    .toolbar {
+      display:flex; flex-wrap:wrap; gap:7px; margin-bottom:9px;
+    }
+    .toolbar button, .toolbar select, .toolbar input[type="color"], .toolbar input[type="number"] {
+      background:var(--main4); border:1px solid #d0d2ef; border-radius:7px;
+      padding:5px 9px; font-size:15px; cursor:pointer; min-width:0;
+      font-family:inherit; transition:background .15s;
+    }
+    .toolbar button.active, .toolbar button:active {background:var(--main1); color:#fff;}
+    .toolbar label {font-size:13px;}
+    .toolbar input[type="color"] {padding:0; width:27px; height:27px;}
+    /* Settings Modal */
+    .settings-modal {
+      position:fixed; top:0; right:-420px; width:400px; max-width:97vw; height:100vh; background:#fff; box-shadow:-2px 0 10px rgba(30,48,72,0.19);
+      z-index:999; transition:right 0.35s cubic-bezier(0.4,0,0.2,1); overflow-y:auto; padding:0 0 35px 0;
+    }
+    .settings-modal.open {right:0;}
+    .settings-modal-header {background:var(--main-gradient); color:#fff; font-size:20px; padding:18px 30px; font-weight:bold; display:flex; justify-content:space-between; align-items:center;}
+    .settings-modal-header button {background:none; border:none; color:#fff; font-size:21px; cursor:pointer;}
+    .settings-section {padding:20px 28px 0 28px;}
+    .settings-section:not(:last-child) {margin-bottom:16px;}
+    .settings-label {font-weight:700; margin-bottom:6px; display:block;}
+    .settings-input, .settings-select {width:100%; padding:8px; border-radius:7px; border:1px solid #bbb; margin-bottom:10px;}
+    .settings-btn {padding:10px 22px; border-radius:17px; border:none; font-weight:700; background:var(--main-gradient); color:#fff; cursor:pointer;}
+    .settings-btn.alt {background:#ddd; color:#333;}
+    .settings-tabs {display:flex; gap:8px; margin-bottom:13px;}
+    .settings-tab {padding:8px 17px; border-radius:16px; border:none; background:#eee; color:var(--main1); font-weight:600; cursor:pointer;}
+    .settings-tab.active {background:var(--main-gradient); color:#fff;}
+    .settings-small {font-size:12px; color:#888;}
+    .settings-analytics {background:#f8fafc; border-radius:10px; padding:11px 16px; margin-bottom:13px;}
+    .settings-feature-list {margin:0; padding:0 0 0 17px; font-size:15px;}
+    .study-extra {margin-bottom:10px;}
+    .study-extra select {padding:7px 13px; border-radius:14px; border:1px solid #bbb;}
+    .settings-section.hide {display:none;}
+    /* Bottom Bar */
+    .bottom-bar {
+      position:fixed;
+      bottom:0; left:0; width:100vw;
+      background:var(--main-gradient);
+      color:#fff; font-size:15px;
+      text-align:center;
+      padding:11px 0 9px 0;
+      z-index:1001;
+      letter-spacing:.18px;
+      box-shadow:0 -2px 14px rgba(90,97,255,0.13);
+      font-family:'Poppins',sans-serif;
+      font-weight:500;
+    }
+    /* Responsive */
+    @media(max-width:900px){
+      .main-content{margin-left:0;}
+      .sidebar{position:static;width:100vw;box-shadow:none;min-width:0;max-width:100vw;}
+      .logo{font-size:26px;}
+      .settings-modal{width:97vw;}
+      .blog-post img{max-width:100vw;}
+    }
+  </style>
 </head>
 <body>
-  <!-- ... (your sidebar, main-content, modal, etc. as above) ... -->
-  <!-- Place your HTML content here exactly as in your working code above -->
-  <script src="script.js"></script>
+  <div class="sidebar">
+    <div>
+      <div class="slide">🏠 Home</div>
+      <div class="slide">🚀 Tech</div>
+      <div class="slide">🎬 Bollywood</div>
+      <div class="slide">⚽ Sports</div>
+      <div class="slide">📈 Stocks</div>
+      <div class="slide-parent" id="studyParent" onclick="toggleStudy()">
+        <span>📚 Study</span>
+        <span class="arrow">&#9654;</span>
+      </div>
+      <div class="slide-group" id="studyGroup" style="display:none;">
+        <div class="slide" onclick="filterStudy('Competition')">🏆 Competition</div>
+        <div class="slide" onclick="filterStudy('12th Board')">🎓 12th Board</div>
+        <div class="slide" onclick="filterStudy('10th Board')">📘 10th Board</div>
+      </div>
+      <div class="slide">🌟 Extra 1</div>
+    </div>
+    <div>
+      <div class="slide settings" onclick="openSettings()">⚙️ Settings</div>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="logo">
+      <span>horizon</span>
+      <span class="plus">PLUS</span>
+    </div>
+    <!-- Search Bar -->
+    <div class="search-bar-wrap">
+      <input type="text" class="search-bar" id="searchBar" placeholder="Search posts..." oninput="searchPosts()">
+    </div>
+    <!-- Nav Row -->
+    <div class="nav-row">
+      <a href="#" class="nav-btn">News</a>
+      <a href="#" class="nav-btn">Blog</a>
+      <a href="#" class="nav-btn">Sports</a>
+      <a href="#" class="nav-btn">Entertainment</a>
+      <a href="#" class="nav-btn">Study</a>
+      <a href="#" class="nav-btn">Workshop</a>
+      <a href="#" class="nav-btn">Contact</a>
+    </div>
+    <!-- Posts -->
+    <div class="section-title">Recent Posts</div>
+    <div class="post-list" id="posts"></div>
+  </div>
+  <!-- Settings Modal -->
+  <div class="settings-modal" id="settingsModal">
+    <div class="settings-modal-header">
+      <span>⚙️ Settings Panel</span>
+      <button onclick="closeSettings()" title="Close">&times;</button>
+    </div>
+    <div class="settings-section">
+      <span class="settings-label">👤 User Login / Signup</span>
+      <form id="loginForm" onsubmit="return handleLoginSignup(event)">
+        <input class="settings-input" type="text" id="loginUsername" placeholder="Username" required>
+        <input class="settings-input" type="password" id="loginPassword" placeholder="Set/Enter Password" required minlength="3">
+        <button class="settings-btn" type="submit" id="loginBtn">Login/Signup</button>
+        <span class="settings-small" id="loginStatus"></span>
+      </form>
+    </div>
+    <div class="settings-section" id="editPostSection">
+      <span class="settings-label">📝 Edit/Create Post</span>
+      <div class="settings-row" style="margin-bottom:9px;">
+        <select class="settings-select" id="settingsCategorySelect" onchange="renderSettingsPostTabs();renderStudyExtra();">
+          <option value="News">News</option>
+          <option value="Blog">Blog</option>
+          <option value="Sports">Sports</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Study">Study</option>
+          <option value="Workshop">Workshop</option>
+          <option value="Contact">Contact</option>
+        </select>
+      </div>
+      <div class="study-extra" id="studyExtra" style="display:none;">
+        <select id="studySubcategory">
+          <option value="">Select Type</option>
+          <option value="Competition">Competition</option>
+          <option value="12th Board">12th Board</option>
+          <option value="10th Board">10th Board</option>
+        </select>
+      </div>
+      <div class="settings-tabs" id="settingsPostTabs"></div>
+      <form id="settingsPostForm" onsubmit="return submitSettingsPost(event)">
+        <!-- Rich Text Toolbar -->
+        <div class="toolbar" id="toolbar">
+          <select id="fontFamily" onchange="formatDoc('fontName',this.value)">
+            <option value="Inter">Font: Inter</option>
+            <option value="Poppins">Font: Poppins</option>
+            <option value="Arial">Arial</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Courier New">Courier New</option>
+          </select>
+          <input type="number" min="13" max="48" id="fontSize" value="16" style="width:52px;" onchange="setFontSize(this.value)">
+          <button type="button" onclick="formatDoc('bold')"><b>B</b></button>
+          <button type="button" onclick="formatDoc('italic')"><i>I</i></button>
+          <button type="button" onclick="formatDoc('underline')"><u>U</u></button>
+          <button type="button" onclick="formatDoc('insertUnorderedList')">&#8226;• List</button>
+          <button type="button" onclick="formatDoc('insertOrderedList')">1. List</button>
+          <button type="button" onclick="formatDoc('justifyLeft')">&#8592;</button>
+          <button type="button" onclick="formatDoc('justifyCenter')">C</button>
+          <button type="button" onclick="formatDoc('justifyRight')">&#8594;</button>
+          <label>Text: <input type="color" id="foreColor" onchange="formatDoc('foreColor',this.value)"></label>
+          <label>Bg: <input type="color" id="hiliteColor" onchange="formatDoc('hiliteColor',this.value)"></label>
+          <button type="button" onclick="insertLink()">🔗</button>
+          <button type="button" onclick="insertImage()">🖼️</button>
+        </div>
+        <input type="hidden" id="settingsPostType" value="blog">
+        <label>Title</label>
+        <input class="settings-input" type="text" id="settingsPostTitle" required>
+        <div id="settingsContentBlock">
+          <label>Content</label>
+          <div id="editor" contenteditable="true" style="background:#fafbff; border:1px solid #d0d2ef; border-radius:7px; padding:12px; min-height:90px; margin-bottom:9px; font-size:16px;"></div>
+        </div>
+        <div id="settingsImageBlock" style="display:none;">
+          <label>Upload Image</label>
+          <input class="settings-input" type="file" id="settingsPostImage" accept="image/*" onchange="settingsPreviewImg(event)">
+          <img id="settingsImgPreview" class="img-preview" style="display:none;">
+        </div>
+        <label>Meta Tags</label>
+        <input class="settings-input" type="text" id="settingsMetaTags" placeholder="Comma separated, eg: news, board, tips">
+        <label>Links (comma separated)</label>
+        <input class="settings-input" type="text" id="settingsLinks" placeholder="https://..., https://...">
+        <label>Post Password</label>
+        <input class="settings-input" type="password" id="settingsPostPassword" required minlength="3" maxlength="40">
+        <div class="settings-small">Is post ko upload/edit karne ke liye yahi password use hoga. (Bina password ke upload nahi hoga)</div>
+        <button class="settings-btn" type="submit">Post</button>
+        <button class="settings-btn alt" type="button" onclick="resetSettingsPostForm()">Cancel</button>
+      </form>
+    </div>
+    <!-- Settings only for Admin -->
+    <div class="settings-section hide" id="adminSection">
+      <span class="settings-label">🔒 Google & SEO Features (Admin Only)</span>
+      <ul class="settings-feature-list">
+        <li>Google AdSense Integration (add code/script)</li>
+        <li>SEO Meta Tag Manager (per post + global)</li>
+        <li>Google Search Console Setup</li>
+        <li>Google Search Engine Integration</li>
+        <li>Analytics Dashboard</li>
+        <li>Other Integrations</li>
+      </ul>
+      <div class="settings-small" style="margin-top:8px;">Yeh sab settings sirf admin password se hi dikhengi.</div>
+    </div>
+    <div class="settings-section settings-analytics">
+      <span class="settings-label">💰 Earnings & Traffic (Demo)</span>
+      <div>Today's Earnings: <b>₹132</b></div>
+      <div>Impressions: <b>2,414</b></div>
+      <div>Clicks: <b>44</b></div>
+      <div>Visitors: <b>1,048</b></div>
+      <div>Top Page: <b>News</b></div>
+    </div>
+  </div>
+  <!-- Bottom Bar -->
+  <div class="bottom-bar">
+    &copy; 2025 horizon <b>PLUS</b> &mdash; Powered by <span style="color:var(--accent);font-weight:700;">AI Bot</span> | <a href="mailto:contact@horizonplus.com" style="color:#fff;text-decoration:underline;">Contact</a>
+  </div>
+  <script>
+    // Sidebar Study Expand
+    function toggleStudy(){
+      let p = document.getElementById('studyParent');
+      let g = document.getElementById('studyGroup');
+      if(g.style.display==='none'){g.style.display=''; p.classList.add('expanded');}
+      else {g.style.display='none'; p.classList.remove('expanded');}
+    }
+    function filterStudy(subcat){
+      document.getElementById('searchBar').value = subcat;
+      searchPosts();
+    }
+    // Settings Modal Logic
+    function openSettings() {
+      document.getElementById('settingsModal').classList.add('open');
+      renderSettingsPostTabs();
+      renderStudyExtra();
+      showAdminSection();
+    }
+    function closeSettings() {
+      document.getElementById('settingsModal').classList.remove('open');
+    }
+    // Simple Auth
+    let user = null;
+    let userPassword = '';
+    let ADMIN_PASS = "horizonplus@2025"; // Set your admin password here
+    function handleLoginSignup(e) {
+      e.preventDefault();
+      const uname = document.getElementById('loginUsername').value.trim();
+      const pwd = document.getElementById('loginPassword').value;
+      if(!uname || !pwd){ return false;}
+      user = uname;
+      userPassword = pwd;
+      document.getElementById('loginStatus').textContent = "Logged in as " + user;
+      document.getElementById('loginBtn').textContent = "Logged in";
+      setTimeout(()=>{document.getElementById('loginStatus').textContent='';}, 2000);
+      showAdminSection();
+      return false;
+    }
+    function showAdminSection(){
+      // Only show admin block if correct admin password is entered
+      if(userPassword===ADMIN_PASS){
+        document.getElementById('adminSection').classList.remove('hide');
+      } else {
+        document.getElementById('adminSection').classList.add('hide');
+      }
+    }
+    // Category & tab logic for settings post form
+    const postTypesPerCategory = {
+      News: ['blog','image','work'],
+      Blog: ['blog','image','work'],
+      Sports: ['blog','image','work'],
+      Entertainment: ['blog','image','work'],
+      Study: ['blog','image','work'],
+      Workshop: ['blog','image','work'],
+      Contact: ['blog','image','work']
+    };
+    const postTypeNames = {blog:'Blog',image:'Image',work:'Work'};
+    let currentSettingsPostType = 'blog';
+    function renderSettingsPostTabs() {
+      const cat = document.getElementById('settingsCategorySelect').value;
+      const tabs = postTypesPerCategory[cat] || ['blog'];
+      const tabsWrap = document.getElementById('settingsPostTabs');
+      tabsWrap.innerHTML = '';
+      tabs.forEach(type => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'settings-tab' + (type === currentSettingsPostType ? ' active':'');
+        btn.innerText = postTypeNames[type] + ' Post';
+        btn.onclick = ()=>setSettingsPostType(type);
+        tabsWrap.appendChild(btn);
+      });
+      setSettingsPostType(currentSettingsPostType);
+    }
+    // Study extra subcategory
+    function renderStudyExtra() {
+      const cat = document.getElementById('settingsCategorySelect').value;
+      document.getElementById('studyExtra').style.display = (cat === 'Study') ? '' : 'none';
+    }
+    function setSettingsPostType(type) {
+      currentSettingsPostType = type;
+      document.getElementById('settingsPostType').value = type;
+      if(type === 'blog') {
+        document.getElementById('settingsContentBlock').style.display='';
+        document.getElementById('settingsImageBlock').style.display='none';
+        document.getElementById('settingsPostTitle').placeholder = 'Blog Title';
+        document.getElementById('editor').style.display='';
+      } else if(type === 'image') {
+        document.getElementById('settingsContentBlock').style.display='none';
+        document.getElementById('settingsImageBlock').style.display='';
+        document.getElementById('settingsPostTitle').placeholder = 'Image Title';
+      } else if(type === 'work') {
+        document.getElementById('settingsContentBlock').style.display='';
+        document.getElementById('settingsImageBlock').style.display='';
+        document.getElementById('settingsPostTitle').placeholder = 'Work Title';
+        document.getElementById('editor').style.display='';
+      }
+    }
+    // Rich Text Editing
+    function formatDoc(cmd, val=null){
+      document.execCommand(cmd,false,val);
+      document.getElementById('editor').focus();
+    }
+    function setFontSize(val){
+      document.execCommand('fontSize',false,"7"); // Set to largest size
+      let elList = document.getElementById('editor').getElementsByTagName('font');
+      if(elList.length){
+        for(let i=0;i<elList.length;i++){
+          if(elList[i].size=="7"){
+            elList[i].removeAttribute("size");
+            elList[i].style.fontSize = val+"px";
+          }
+        }
+      }
+    }
+    function insertLink(){
+      let url = prompt("Enter link (https://...):");
+      if(url) document.execCommand('createLink',false,url);
+    }
+    function insertImage(){
+      let url = prompt("Enter image URL:");
+      if(url) document.execCommand('insertImage',false,url);
+    }
+    // Preview image in settings post form
+    function settingsPreviewImg(e) {
+      const file = e.target.files[0];
+      const img = document.getElementById('settingsImgPreview');
+      if (file) {
+        img.src = URL.createObjectURL(file);
+        img.style.display = 'block';
+      } else {
+        img.style.display = 'none';
+      }
+    }
+    // Submit post from settings post form (Requires password match)
+    function submitSettingsPost(event) {
+      event.preventDefault();
+      if(!user || !userPassword){
+        alert("Please login/signup and set your password first.");
+        return false;
+      }
+      const inputPwd = document.getElementById('settingsPostPassword').value;
+      if(inputPwd !== userPassword){
+        alert("Password incorrect. Only your set password can upload post.");
+        return false;
+      }
+      const cat = document.getElementById('settingsCategorySelect').value;
+      const subcat = cat === 'Study' ? document.getElementById('studySubcategory').value : '';
+      const type = document.getElementById('settingsPostType').value;
+      const title = document.getElementById('settingsPostTitle').value;
+      // Collect rich text or image content
+      let content = "";
+      if(type==='blog'||type==='work'){
+        content = document.getElementById('editor').innerHTML;
+      }
+      const imgInput = document.getElementById('settingsPostImage');
+      const metaTags = document.getElementById('settingsMetaTags').value;
+      const links = document.getElementById('settingsLinks').value;
+      let imgTag = '';
+      if(type==='image' || type==='work') {
+        if(imgInput.files[0]){
+          const url = URL.createObjectURL(imgInput.files[0]);
+          imgTag = `<img src="${url}">`;
+        }
+      }
+      const posts = document.getElementById('posts');
+      const el = document.createElement('div');
+      el.className = 'blog-post';
+      let categoryTag = cat;
+      if(cat === 'Study' && subcat) categoryTag += ' - ' + subcat;
+      let metaHtml = metaTags ? `<div class="meta-tags">Meta: ${metaTags}</div>` : '';
+      let linkHtml = '';
+      if(links){
+        linkHtml = `<div class="post-links">` + links.split(',').map(l=>`<a href="${l.trim()}" target="_blank">${l.trim()}</a>`).join('') + `</div>`;
+      }
+      let translateBtn = `<button class="translate" onclick="translatePost(this)">🌐 Translate</button>`;
+      el.innerHTML = `<span class="category-tag">${categoryTag}</span><h4>${title}</h4>${imgTag}${(type==='blog'||type==='work')? `<div class="post-content">${content}</div>` : ''}${metaHtml}${linkHtml}${translateBtn}`;
+      posts.prepend(el);
+      resetSettingsPostForm();
+      alert("Post uploaded!");
+    }
+    function resetSettingsPostForm() {
+      document.getElementById('settingsPostForm').reset();
+      document.getElementById('settingsImgPreview').style.display = 'none';
+      document.getElementById('editor').innerHTML = '';
+      currentSettingsPostType = 'blog';
+      renderSettingsPostTabs();
+      renderStudyExtra();
+    }
+    // Search functionality (filter posts by title/content/category/tags/links)
+    function searchPosts() {
+      const q = document.getElementById('searchBar').value.trim().toLowerCase();
+      document.querySelectorAll('.blog-post').forEach(post=>{
+        const text = post.innerText.toLowerCase();
+        post.style.display = text.includes(q)?'':'none';
+      });
+    }
+    // Google Translate (client-side, free API: demo)
+    function translatePost(btn){
+      let postBox = btn.closest('.blog-post');
+      let contentDiv = postBox.querySelector('.post-content');
+      if(!contentDiv) return;
+      let text = contentDiv.innerText;
+      btn.disabled = true;
+      btn.textContent = "Translating...";
+      fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|hi`)
+        .then(r=>r.json())
+        .then(res=>{
+          contentDiv.innerHTML = res.responseData.translatedText;
+          btn.textContent = "🌐 Hindi";
+          btn.onclick=function(){reverseTranslate(contentDiv, text, btn);}
+        })
+        .catch(_=>{
+          btn.textContent = "Error";
+        });
+    }
+    function reverseTranslate(contentDiv, original, btn){
+      contentDiv.innerHTML = original;
+      btn.textContent = "🌐 Translate";
+      btn.onclick = function(){translatePost(btn);}
+    }
+    // Open settings with esc key
+    document.addEventListener('keydown',function(e){
+      if(e.key==="Escape") closeSettings();
+    })
+  </script>
 </body>
 </html>
