@@ -9,6 +9,7 @@
   <meta name="description" content="horizon PLUS - The most beautiful and advanced news, blog, study, workshop, and earning platform.">
   <meta name="keywords" content="horizon PLUS, News, Blog, Study, Workshop, Sports, Competition, Board, Earning, Professional, Modern">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="sidebar">
@@ -37,11 +38,9 @@
       <span>horizon</span>
       <span class="plus">PLUS</span>
     </div>
-    <!-- Search Bar -->
     <div class="search-bar-wrap">
       <input type="text" class="search-bar" id="searchBar" placeholder="Search posts..." oninput="searchPosts()">
     </div>
-    <!-- Nav Row -->
     <div class="nav-row">
       <button class="nav-btn" onclick="showCategory('Home')">Home</button>
       <button class="nav-btn" onclick="showCategory('Tech')">Tech</button>
@@ -50,30 +49,40 @@
       <button class="nav-btn" onclick="showCategory('Study')">Study</button>
       <button class="nav-btn" onclick="showCategory('Workshop')">Workshop</button>
       <button class="nav-btn" onclick="showCategory('Contact')">Contact</button>
+      <button class="nav-btn" onclick="showCategory('Recent')">Recent</button>
     </div>
-    <!-- Posts Sections By Category -->
     <div class="section-title">Recent Posts</div>
-    <div id="posts-home" class="post-list"></div>
-    <div id="posts-tech" class="post-list" style="display:none"></div>
-    <div id="posts-bollywood" class="post-list" style="display:none"></div>
-    <div id="posts-sports" class="post-list" style="display:none"></div>
-    <div id="posts-study" class="post-list" style="display:none"></div>
-    <div id="posts-workshop" class="post-list" style="display:none"></div>
-    <div id="posts-contact" class="post-list" style="display:none"></div>
-    <div id="posts-extra" class="post-list" style="display:none"></div>
-    <div id="posts-competition" class="post-list" style="display:none"></div>
+    <div id="posts-Recent" class="post-list"></div>
+    <div id="posts-Home" class="post-list" style="display:none"></div>
+    <div id="posts-Tech" class="post-list" style="display:none"></div>
+    <div id="posts-Bollywood" class="post-list" style="display:none"></div>
+    <div id="posts-Sports" class="post-list" style="display:none"></div>
+    <div id="posts-Study" class="post-list" style="display:none"></div>
+    <div id="posts-Workshop" class="post-list" style="display:none"></div>
+    <div id="posts-Contact" class="post-list" style="display:none"></div>
+    <div id="posts-Extra" class="post-list" style="display:none"></div>
+    <div id="posts-Competition" class="post-list" style="display:none"></div>
     <div id="posts-12th Board" class="post-list" style="display:none"></div>
     <div id="posts-10th Board" class="post-list" style="display:none"></div>
   </div>
-  <!-- Settings Modal -->
   <div class="settings-modal" id="settingsModal">
     <div class="settings-modal-header">
-      <span>⚙️ Post Editor</span>
+      <span>⚙️ Settings Panel</span>
       <button onclick="closeSettings()" title="Close">&times;</button>
     </div>
     <div class="settings-section">
+      <span class="settings-label">👤 User Login / Signup</span>
+      <form id="loginForm" onsubmit="return handleLoginSignup(event)">
+        <input class="settings-input" type="text" id="loginUsername" placeholder="Username" required>
+        <input class="settings-input" type="password" id="loginPassword" placeholder="Set/Enter Password" required minlength="3">
+        <button class="settings-btn" type="submit" id="loginBtn">Login/Signup</button>
+        <span class="settings-small" id="loginStatus"></span>
+      </form>
+    </div>
+    <div class="settings-section" id="editPostSection">
+      <span class="settings-label">📝 Edit/Create Post</span>
       <form id="settingsPostForm" onsubmit="return submitSettingsPost(event)">
-        <select class="settings-select" id="settingsCategorySelect" required>
+        <select class="settings-select" id="settingsCategorySelect">
           <option value="Home">Home</option>
           <option value="Tech">Tech</option>
           <option value="Bollywood">Bollywood</option>
@@ -97,9 +106,31 @@
         <input class="settings-input" type="text" id="settingsMetaTags" placeholder="Comma separated, eg: news, board, tips">
         <label>Links (comma separated)</label>
         <input class="settings-input" type="text" id="settingsLinks" placeholder="https://..., https://...">
+        <label>Post Password</label>
+        <input class="settings-input" type="password" id="settingsPostPassword" required minlength="3" maxlength="40">
+        <div class="settings-small">Bina password post upload nahi hoga.</div>
         <button class="settings-btn" type="submit">Post</button>
         <button class="settings-btn alt" type="button" onclick="resetSettingsPostForm()">Cancel</button>
       </form>
+    </div>
+    <div class="settings-section hide" id="adminSection">
+      <span class="settings-label">🔒 Admin Panel</span>
+      <label>AdSense Script</label>
+      <textarea class="settings-input" id="adsenseScript" placeholder="Paste AdSense code"></textarea>
+      <label>SEO Meta Tag</label>
+      <input class="settings-input" id="seoMeta" placeholder="Site meta description">
+      <label>Analytics UA Code</label>
+      <input class="settings-input" id="analyticsCode" placeholder="UA-XXXXXXXXX-X">
+      <button class="settings-btn" onclick="saveAdminSettings()">Save Settings</button>
+    </div>
+    <div class="settings-section settings-analytics">
+      <span class="settings-label">💰 Analytics (Demo)</span>
+      <canvas id="analyticsChart" width="350" height="160"></canvas>
+      <div>Today's Earnings: <b>₹132</b></div>
+      <div>Impressions: <b>2,414</b></div>
+      <div>Clicks: <b>44</b></div>
+      <div>Visitors: <b>1,048</b></div>
+      <div>Top Page: <b>News</b></div>
     </div>
   </div>
   <div class="bottom-bar">
