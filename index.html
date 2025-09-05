@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>horizon PLUS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600,900|Poppins:400,600,900&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" />
+  <meta name="description" content="horizon PLUS - The most beautiful and advanced news, blog, study, workshop, and earning platform.">
+  <meta name="keywords" content="horizon PLUS, News, Blog, Study, Workshop, Sports, Competition, Board, Earning, Professional, Modern">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sidebar">
+    <div>
+      <div class="slide" onclick="showCategory('Home')">🏠 Home</div>
+      <div class="slide" onclick="showCategory('Tech')">🚀 Tech</div>
+      <div class="slide" onclick="showCategory('Bollywood')">🎬 Bollywood</div>
+      <div class="slide" onclick="showCategory('Sports')">⚽ Sports</div>
+      <div class="slide-parent" id="studyParent" onclick="toggleStudy()">
+        <span>📚 Study</span>
+        <span class="arrow">&#9654;</span>
+      </div>
+      <div class="slide-group" id="studyGroup" style="display:none;">
+        <div class="slide" onclick="showCategory('Competition')">🏆 Competition</div>
+        <div class="slide" onclick="showCategory('12th Board')">🎓 12th Board</div>
+        <div class="slide" onclick="showCategory('10th Board')">📘 10th Board</div>
+      </div>
+      <div class="slide" onclick="showCategory('Extra')">🌟 Extra 1</div>
+    </div>
+    <div>
+      <div class="slide settings" onclick="openSettings()">⚙️ Settings</div>
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="logo">
+      <span>horizon</span>
+      <span class="plus">PLUS</span>
+    </div>
+    <!-- Search Bar -->
+    <div class="search-bar-wrap">
+      <input type="text" class="search-bar" id="searchBar" placeholder="Search posts..." oninput="searchPosts()">
+    </div>
+    <!-- Nav Row -->
+    <div class="nav-row">
+      <button class="nav-btn" onclick="showCategory('Home')">Home</button>
+      <button class="nav-btn" onclick="showCategory('Tech')">Tech</button>
+      <button class="nav-btn" onclick="showCategory('Bollywood')">Bollywood</button>
+      <button class="nav-btn" onclick="showCategory('Sports')">Sports</button>
+      <button class="nav-btn" onclick="showCategory('Study')">Study</button>
+      <button class="nav-btn" onclick="showCategory('Workshop')">Workshop</button>
+      <button class="nav-btn" onclick="showCategory('Contact')">Contact</button>
+    </div>
+    <!-- Posts Sections By Category -->
+    <div class="section-title">Recent Posts</div>
+    <div id="posts-home" class="post-list"></div>
+    <div id="posts-tech" class="post-list" style="display:none"></div>
+    <div id="posts-bollywood" class="post-list" style="display:none"></div>
+    <div id="posts-sports" class="post-list" style="display:none"></div>
+    <div id="posts-study" class="post-list" style="display:none"></div>
+    <div id="posts-workshop" class="post-list" style="display:none"></div>
+    <div id="posts-contact" class="post-list" style="display:none"></div>
+    <div id="posts-extra" class="post-list" style="display:none"></div>
+    <div id="posts-competition" class="post-list" style="display:none"></div>
+    <div id="posts-12th Board" class="post-list" style="display:none"></div>
+    <div id="posts-10th Board" class="post-list" style="display:none"></div>
+  </div>
+  <!-- Settings Modal -->
+  <div class="settings-modal" id="settingsModal">
+    <div class="settings-modal-header">
+      <span>⚙️ Post Editor</span>
+      <button onclick="closeSettings()" title="Close">&times;</button>
+    </div>
+    <div class="settings-section">
+      <form id="settingsPostForm" onsubmit="return submitSettingsPost(event)">
+        <select class="settings-select" id="settingsCategorySelect" required>
+          <option value="Home">Home</option>
+          <option value="Tech">Tech</option>
+          <option value="Bollywood">Bollywood</option>
+          <option value="Sports">Sports</option>
+          <option value="Workshop">Workshop</option>
+          <option value="Contact">Contact</option>
+          <option value="Study">Study</option>
+          <option value="Competition">Competition</option>
+          <option value="12th Board">12th Board</option>
+          <option value="10th Board">10th Board</option>
+          <option value="Extra">Extra 1</option>
+        </select>
+        <label>Title</label>
+        <input class="settings-input" type="text" id="settingsPostTitle" required>
+        <label>Content</label>
+        <div id="editor" contenteditable="true" style="background:#fafbff; border:1px solid #d0d2ef; border-radius:7px; padding:12px; min-height:90px; margin-bottom:9px; font-size:16px;"></div>
+        <label>Upload Image</label>
+        <input class="settings-input" type="file" id="settingsPostImage" accept="image/*" onchange="settingsPreviewImg(event)">
+        <img id="settingsImgPreview" class="img-preview" style="display:none; max-width:150px; margin-bottom:8px;">
+        <label>Meta Tags</label>
+        <input class="settings-input" type="text" id="settingsMetaTags" placeholder="Comma separated, eg: news, board, tips">
+        <label>Links (comma separated)</label>
+        <input class="settings-input" type="text" id="settingsLinks" placeholder="https://..., https://...">
+        <button class="settings-btn" type="submit">Post</button>
+        <button class="settings-btn alt" type="button" onclick="resetSettingsPostForm()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  <div class="bottom-bar">
+    &copy; 2025 horizon <b>PLUS</b> &mdash; Powered by <span style="color:#ffb92b;font-weight:700;">AI Bot</span> | <a href="mailto:contact@horizonplus.com" style="color:#fff;text-decoration:underline;">Contact</a>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
