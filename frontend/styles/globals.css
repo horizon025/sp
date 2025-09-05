@@ -1,0 +1,28 @@
+body {
+  font-family: 'Inter', 'Poppins', Arial, sans-serif;
+  background: #e8e9fd;
+  color: #141f38;
+  margin: 0;
+}
+.sidebar {
+  width: 220px;
+  background: linear-gradient(180deg, #343a6e 0%, #232949 100%);
+  min-height: 100vh;
+  padding: 30px 0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.sidebar button {
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:17px;
+  font-weight:600;
+  padding:10px 22px;
+  cursor:pointer;
+  text-align:left;
+}
+.sidebar button:hover {background:linear-gradient(90deg,#5a61ff 0%,#892be2 100%); color:#fff;}
+.blog-post { background:#fff; padding:20px; border-radius:13px; box-shadow:0 2px 14px rgba(90,97,255,0.07); margin-bottom:14px;}
+.category-tag {font-size:13px; background:linear-gradient(90deg, #5a61ff 0%, #892be2 100%); color:#fff; border-radius:9px; padding:3px 14px; font-weight:600;}
