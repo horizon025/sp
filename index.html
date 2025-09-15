@@ -2,149 +2,172 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>horizon PLUS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css?family=Inter:400,600,900|Poppins:400,600,900&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico" />
-  <meta name="description" content="horizon PLUS - The most beautiful and advanced news, blog, study, workshop, and earning platform.">
-  <meta name="keywords" content="horizon PLUS, News, Blog, Study, Workshop, Sports, Competition, Board, Earning, Professional, Modern">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Horizon</title>
+  <meta name="description" content="Horizon - Leading platform for news, blogs, study, and workshops.">
+  <meta name="keywords" content="Horizon, News, Blog, Study, Workshop, Sports, Earning">
+  <meta name="author" content="Horizon Team">
+  <meta property="og:title" content="Horizon">
+  <meta property="og:description" content="Stay updated with the latest news and education on Horizon.">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="sidebar">
-    <div>
-      <div class="slide" onclick="showCategory('Home')">🏠 Home</div>
-      <div class="slide" onclick="showCategory('Tech')">🚀 Tech</div>
-      <div class="slide" onclick="showCategory('Bollywood')">🎬 Bollywood</div>
-      <div class="slide" onclick="showCategory('Sports')">⚽ Sports</div>
-      <div class="slide-parent" id="studyParent" onclick="toggleStudy()">
-        <span>📚 Study</span>
-        <span class="arrow">&#9654;</span>
-      </div>
-      <div class="slide-group" id="studyGroup" style="display:none;">
-        <div class="slide" onclick="showCategory('Competition')">🏆 Competition</div>
-        <div class="slide" onclick="showCategory('12th Board')">🎓 12th Board</div>
-        <div class="slide" onclick="showCategory('10th Board')">📘 10th Board</div>
-      </div>
-      <div class="slide" onclick="showCategory('Extra')">🌟 Extra 1</div>
+  <div class="sidebar" id="sidebar">
+    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="30" fill="url(#sunGrad)" />
+      <path d="M50 20 L55 10 M50 20 L45 10 M80 50 L90 55 M80 50 L90 45 M50 80 L55 90 M50 80 L45 90 M20 50 L10 55 M20 50 L10 45 M50 20 L60 5 M50 20 L40 5 M80 50 L95 60 M80 50 L95 40 M50 80 L60 95 M50 80 L40 95 M20 50 L5 60 M20 50 L5 40" stroke="url(#rayGrad)" stroke-width="2" fill="none" />
+      <text x="50" y="85" font-family="Poppins" font-size="16" fill="#1e3a8a" text-anchor="middle" font-weight="700" letter-spacing="1.5" style="text-transform: uppercase; font-style: italic;">horizon</text>
+      <defs>
+        <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+          <stop offset="0%" style="stop-color:#ffcc00; stop-opacity:1" />
+          <stop offset="70%" style="stop-color:#ff7e5f; stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#ff5a1f; stop-opacity:0.8" />
+        </radialGradient>
+        <linearGradient id="rayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#ffcc00; stop-opacity:0.8" />
+          <stop offset="100%" style="stop-color:#ff7e5f; stop-opacity:0" />
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="slide" onclick="showCategory('Home')">🏠 Home</div>
+    <div class="slide" onclick="showCategory('News')">📰 News</div>
+    <div class="slide" onclick="showCategory('Live')">📺 Live</div>
+    <div class="slide" onclick="toggleStudy()">📚 Study</div>
+    <div class="study-group hidden ml-4" id="studyGroup">
+      <div class="slide" onclick="showCategory('10thBoardHindi')">📖 10th Board Hindi</div>
+      <div class="slide" onclick="showCategory('10thBoardEnglish')">📖 10th Board English</div>
+      <div class="slide" onclick="showCategory('12thBoardHindi')">🎓 12th Board Hindi</div>
+      <div class="slide" onclick="showCategory('12thBoardEnglish')">🎓 12th Board English</div>
+      <div class="slide" onclick="showCategory('CompetitiveHindi')">🏆 Competitive Exams Hindi</div>
+      <div class="slide" onclick="showCategory('CompetitiveEnglish')">🏆 Competitive Exams English</div>
     </div>
-    <div>
-      <div class="slide settings" onclick="openSettings()">⚙️ Settings</div>
+    <div class="slide" onclick="toggleWorkshop()">🔧 Workshop</div>
+    <div class="workshop-group hidden ml-4" id="workshopGroup">
+      <div class="slide" onclick="showCategory('Cafe')">☕ Cafe</div>
+      <div class="slide" onclick="showCategory('WebsiteBuilder')">🌐 Website Builder</div>
+      <div class="slide" onclick="showCategory('Editor')">✏️ Editor</div>
+      <div class="slide" onclick="showCategory('Designer')">🎨 Designer</div>
+      <div class="slide" onclick="showCategory('ContentCreator')">📝 Content Creator</div>
+      <div class="slide" onclick="showCategory('Affiliate')">💼 Affiliate</div>
+      <div class="slide" onclick="showCategory('Dropshipping')">📦 Dropshipping</div>
+      <div class="slide" onclick="showCategory('Promotion')">📣 Promotion</div>
     </div>
+    <div class="slide" onclick="showCategory('Tech')">🚀 Tech</div>
+    <div class="slide" onclick="showCategory('Bollywood')">🎬 Bollywood</div>
+    <div class="slide" onclick="showCategory('Sports')">⚽ Sports</div>
+    <div class="slide" onclick="showCategory('Stocks')">💹 Stocks</div>
+    <div class="slide" onclick="showCategory('Entertainment')">🎭 Entertainment</div>
+    <div class="slide" onclick="showCategory('Extra')">🌟 Extra</div>
+    <div class="slide" onclick="showCategory('Contact')">📧 Contact</div>
+    <div class="slide" onclick="showCategory('Trending')">📈 Trending</div>
+    <div class="slide" onclick="showCategory('Videos')">🎥 Videos</div>
+    <div class="slide" onclick="showCategory('Politics')">🏛️ Politics</div>
+    <div class="slide" onclick="showCategory('Health')">💊 Health</div>
   </div>
-  <div class="main-content">
-    <div class="logo">
-      <span>horizon</span>
-      <span class="plus">PLUS</span>
-    </div>
-    <div class="search-bar-wrap">
-      <input type="text" class="search-bar" id="searchBar" placeholder="Search posts..." oninput="searchPosts()">
-    </div>
-    <div class="nav-row">
-      <button class="nav-btn" onclick="showCategory('Home')">Home</button>
-      <button class="nav-btn" onclick="showCategory('Tech')">Tech</button>
-      <button class="nav-btn" onclick="showCategory('Bollywood')">Bollywood</button>
-      <button class="nav-btn" onclick="showCategory('Sports')">Sports</button>
-      <button class="nav-btn" onclick="showCategory('Study')">Study</button>
-      <button class="nav-btn" onclick="showCategory('Workshop')">Workshop</button>
-      <button class="nav-btn" onclick="showCategory('Contact')">Contact</button>
-      <button class="nav-btn" onclick="showCategory('Recent')">Recent</button>
-    </div>
-    <div class="section-title">Recent Posts</div>
-    <div id="posts-Recent" class="post-list"></div>
-    <div id="posts-Home" class="post-list" style="display:none"></div>
-    <div id="posts-Tech" class="post-list" style="display:none"></div>
-    <div id="posts-Bollywood" class="post-list" style="display:none"></div>
-    <div id="posts-Sports" class="post-list" style="display:none"></div>
-    <div id="posts-Study" class="post-list" style="display:none"></div>
-    <div id="posts-Workshop" class="post-list" style="display:none"></div>
-    <div id="posts-Contact" class="post-list" style="display:none"></div>
-    <div id="posts-Extra" class="post-list" style="display:none"></div>
-    <div id="posts-Competition" class="post-list" style="display:none"></div>
-    <div id="posts-12th Board" class="post-list" style="display:none"></div>
-    <div id="posts-10th Board" class="post-list" style="display:none"></div>
-  </div>
-  <div class="settings-modal" id="settingsModal">
-    <div class="settings-modal-header">
-      <span>⚙️ Settings Panel</span>
-      <button onclick="closeSettings()" title="Close">&times;</button>
-    </div>
-    <div class="settings-section">
-      <span class="settings-label">👤 User Login / Signup</span>
-      <form id="loginForm" onsubmit="return handleLoginSignup(event)">
-        <input class="settings-input" type="text" id="loginUsername" placeholder="Username" required>
-        <input class="settings-input" type="password" id="loginPassword" placeholder="Set/Enter Password" required minlength="3">
-        <button class="settings-btn" type="submit" id="loginBtn">Login/Signup</button>
-        <span class="settings-small" id="loginStatus"></span>
-      </form>
-    </div>
-    <div class="settings-section" id="editPostSection">
-      <span class="settings-label">📝 Edit/Create Post</span>
-      <form id="settingsPostForm" onsubmit="return submitSettingsPost(event)">
-        <select class="settings-select" id="settingsCategorySelect">
-          <option value="Home">Home</option>
-          <option value="Tech">Tech</option>
-          <option value="Bollywood">Bollywood</option>
-          <option value="Sports">Sports</option>
-          <option value="Workshop">Workshop</option>
-          <option value="Contact">Contact</option>
-          <option value="Study">Study</option>
-          <option value="Competition">Competition</option>
-          <option value="12th Board">12th Board</option>
-          <option value="10th Board">10th Board</option>
-          <option value="Extra">Extra 1</option>
+
+  <div class="main-content" id="mainContent">
+    <div class="flex justify-between items-center mb-6">
+      <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="30" fill="url(#sunGrad)" />
+        <path d="M50 20 L55 10 M50 20 L45 10 M80 50 L90 55 M80 50 L90 45 M50 80 L55 90 M50 80 L45 90 M20 50 L10 55 M20 50 L10 45 M50 20 L60 5 M50 20 L40 5 M80 50 L95 60 M80 50 L95 40 M50 80 L60 95 M50 80 L40 95 M20 50 L5 60 M20 50 L5 40" stroke="url(#rayGrad)" stroke-width="2" fill="none" />
+        <text x="50" y="85" font-family="Poppins" font-size="16" fill="#1e3a8a" text-anchor="middle" font-weight="700" letter-spacing="1.5" style="text-transform: uppercase; font-style: italic;">horizon</text>
+        <defs>
+          <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" style="stop-color:#ffcc00; stop-opacity:1" />
+            <stop offset="70%" style="stop-color:#ff7e5f; stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ff5a1f; stop-opacity:0.8" />
+          </radialGradient>
+          <linearGradient id="rayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffcc00; stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#ff7e5f; stop-opacity:0" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="right-corner flex items-center">
+        <button class="toggle-btn" onclick="toggleTheme()">🌙 Light/Dark</button>
+        <select class="translate-btn" onchange="translateInterface(this.value)">
+          <option value="en">English</option>
+          <option value="hi">हिंदी</option>
         </select>
-        <label>Title</label>
-        <input class="settings-input" type="text" id="settingsPostTitle" required>
-        <label>Content</label>
-        <div id="editor" contenteditable="true" style="background:#fafbff; border:1px solid #d0d2ef; border-radius:7px; padding:12px; min-height:90px; margin-bottom:9px; font-size:16px;"></div>
-        <label>Upload Image</label>
-        <input class="settings-input" type="file" id="settingsPostImage" accept="image/*" onchange="settingsPreviewImg(event)">
-        <img id="settingsImgPreview" class="img-preview" style="display:none; max-width:150px; margin-bottom:8px;">
-        <label>Meta Tags</label>
-        <input class="settings-input" type="text" id="settingsMetaTags" placeholder="Comma separated, eg: news, board, tips">
-        <label>Links (comma separated)</label>
-        <input class="settings-input" type="text" id="settingsLinks" placeholder="https://..., https://...">
-        <label>Post Password</label>
-        <input class="settings-input" type="password" id="settingsPostPassword" required minlength="3" maxlength="40">
-        <div class="settings-small">Bina password post upload nahi hoga.</div>
-        <button class="settings-btn" type="submit">Post</button>
-        <button class="settings-btn alt" type="button" onclick="resetSettingsPostForm()">Cancel</button>
-      </form>
+        <button class="toggle-btn" onclick="openSettings()">⚙️</button>
+      </div>
     </div>
-    <div class="settings-section hide" id="adminSection">
-      <span class="settings-label">🔒 Admin Panel</span>
-      <label>AdSense Script</label>
-      <textarea class="settings-input" id="adsenseScript" placeholder="Paste AdSense code"></textarea>
-      <label>SEO Meta Tag</label>
-      <input class="settings-input" id="seoMeta" placeholder="Site meta description">
-      <label>Analytics UA Code</label>
-      <input class="settings-input" id="analyticsCode" placeholder="UA-XXXXXXXXX-X">
-      <button class="settings-btn" onclick="saveAdminSettings()">Save Settings</button>
+    <input type="text" class="search-bar mb-6" id="searchBar" placeholder="Search posts..." oninput="searchPosts()">
+    <div class="blue-section">
+      <span onclick="showCategory('Trending')">Trending</span> | 
+      <span onclick="showCategory('Videos')">Videos</span> | 
+      <span onclick="showCategory('Politics')">Politics</span> | 
+      <span onclick="showCategory('Health')">Health</span> | 
+      <span onclick="showCategory('TechNews')">Tech News</span> | 
+      <span onclick="showCategory('Business')">Business</span> | 
+      <span onclick="showCategory('Lifestyle')">Lifestyle</span> | 
+      <span onclick="showCategory('More')">More...</span>
     </div>
-    <div class="settings-section settings-analytics">
-      <span class="settings-label">💰 Analytics (Demo)</span>
-      <canvas id="analyticsChart" width="350" height="160"></canvas>
-      <div>Today's Earnings: <b>₹132</b></div>
-      <div>Impressions: <b>2,414</b></div>
-      <div>Clicks: <b>44</b></div>
-      <div>Visitors: <b>1,048</b></div>
-      <div>Top Page: <b>News</b></div>
+    <div class="post-section mt-6">
+      <h2 class="text-2xl font-bold mb-4">Latest 5 Posts</h2>
+      <div id="recent-posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
   </div>
-  <div class="bottom-bar">
-    &copy; 2025 horizon <b>PLUS</b> &mdash; Powered by <span style="color:#ffb92b;font-weight:700;">AI Bot</span> | <a href="mailto:contact@horizonplus.com" style="color:#fff;text-decoration:underline;">Contact</a>
+
+  <div class="settings-modal" id="settingsModal">
+    <div class="p-6 bg-gray-100">
+      <h3 class="text-xl font-bold mb-4">⚙️ Settings</h3>
+      <button class="text-3xl float-right -mt-8" onclick="closeSettings()">×</button>
+    </div>
+    <div class="p-6">
+      <div class="settings-section">
+        <h4>👤 Account</h4>
+        <input type="text" placeholder="Username" id="loginUsername">
+        <input type="password" placeholder="Password" id="loginPassword">
+        <button onclick="handleLogin()">Login</button>
+        <button onclick="handleRegister()">Register</button>
+      </div>
+      <div class="settings-section">
+        <h4>🎨 Theme</h4>
+        <select onchange="setTheme(this.value)">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="system">System Default</option>
+        </select>
+      </div>
+      <div class="settings-section">
+        <h4>🌐 Language</h4>
+        <select onchange="translateInterface(this.value)">
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+        </select>
+      </div>
+      <div class="settings-section">
+        <h4>🔔 Notifications</h4>
+        <button onclick="enableNotifications()">Enable</button>
+        <button onclick="disableNotifications()">Disable</button>
+      </div>
+      <div class="settings-section">
+        <h4>🔒 Privacy</h4>
+        <button onclick="viewPrivacyPolicy()">View Policy</button>
+      </div>
+      <div class="settings-section">
+        <h4>💰 Analytics</h4>
+        <canvas id="analyticsChart" width="300" height="200"></canvas>
+        <button id="downloadChart">Download Chart</button>
+      </div>
+    </div>
   </div>
+
+  <footer class="footer">
+    &copy; 2025 Horizon | 
+    <a href="https://youtube.com/horizon">YouTube</a> | 
+    <a href="https://x.com/horizon">X</a> | 
+    <a href="https://facebook.com/horizon">Facebook</a> | 
+    <a href="https://instagram.com/horizon">Instagram</a> | 
+    <a href="mailto:contact@horizon.com">Email: contact@horizon.com</a> | 
+    <span>Mobile: +1-123-456-7890</span>
+  </footer>
+
+  <div class="fixed top-4 left-4 z-50">
+    <button class="text-2xl text-white bg-gray-800 p-2 rounded" onclick="toggleSidebar()">☰</button>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
-<head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SK5PQM0M3X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SK5PQM0M3X');
-</script></head>
