@@ -1,173 +1,347 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Horizon</title>
-  <meta name="description" content="Horizon - Leading platform for news, blogs, study, and workshops.">
-  <meta name="keywords" content="Horizon, News, Blog, Study, Workshop, Sports, Earning">
-  <meta name="author" content="Horizon Team">
-  <meta property="og:title" content="Horizon">
-  <meta property="og:description" content="Stay updated with the latest news and education on Horizon.">
-  <link rel="stylesheet" href="styles.css">
+  <title>Horizon - Modern News & Study Hub</title>
+  
+  <!-- ✅ SEO Meta Tags -->
+  <meta name="description" content="Horizon - Latest News, Sports, Entertainment, Study & Workshop Updates. Stay informed with trending topics and insights.">
+  <meta name="keywords" content="Horizon, News, Sports, Entertainment, Study, Workshop, Tech, Trending">
+
+  <!-- ✅ Open Graph -->
+  <meta property="og:title" content="Horizon - Modern News & Study Hub">
+  <meta property="og:description" content="Stay updated with News, Sports, Entertainment, Study & Workshop trends.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/">
+  <meta property="og:image" content="https://yourdomain.com/logo.png">
+
+  <!-- ✅ Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Horizon - Modern News & Study Hub">
+  <meta name="twitter:description" content="Stay updated with News, Sports, Entertainment, Study & Workshop trends.">
+  <meta name="twitter:image" content="https://yourdomain.com/logo.png">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(#f0f2f5, #e0e7ff);
+    }
+    .logo {
+      font-size: 48px;
+      font-weight: bold;
+      color: #4b6cb7;
+      background: linear-gradient(90deg, #4b6cb7, #182848);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background: #fff;
+      position: fixed;
+      overflow-x: auto; /* Horizontal scrolling */
+      overflow-y: auto; /* Vertical scrolling */
+      padding: 20px 0;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+    .sidebar .slider-container {
+      padding: 10px;
+      position: relative;
+    }
+    .sidebar .slider {
+      display: flex;
+      flex-direction: column; /* Vertical arrangement */
+      gap: 10px;
+      min-height: 100%; /* Ensure full height for vertical scrolling */
+    }
+    .sidebar .slide {
+      min-width: 200px;
+      background: linear-gradient(90deg, #1e3a8a, #1e40af); /* Blue gradient */
+      color: #fff; /* White text */
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 10px;
+    }
+    .pagination-dot {
+      width: 10px;
+      height: 10px;
+      background: #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .pagination-dot.active {
+      background: #1e3a8a;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 30px;
+      margin-left: 270px; /* Adjust for sidebar width */
+    }
+    .modern-btn {
+      padding: 12px 25px;
+      font-size: 18px;
+      color: white;
+      background: linear-gradient(90deg, #4b6cb7, #182848);
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .modern-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .filter-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      background: linear-gradient(90deg, #1e3a8a, #1e40af);
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      margin: 5px;
+      transition: transform 0.3s;
+    }
+    .filter-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* ✅ Category Grid with Horizontal Scrolling */
+    .category-section {
+      padding: 20px;
+      margin-left: 270px; /* Adjust for sidebar width */
+    }
+    .category-title {
+      font-size: 24px;
+      margin-bottom: 15px;
+      text-align: center;
+      color: #182848;
+    }
+    .post-grid {
+      display: flex; /* Changed to flex for horizontal scrolling */
+      overflow-x: auto; /* Horizontal scrolling */
+      gap: 15px;
+      padding-bottom: 10px; /* To ensure scrollbar is visible */
+    }
+    .blog-post {
+      background: #fff;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      min-width: 220px; /* Fixed width for consistency */
+      flex-shrink: 0; /* Prevent cards from shrinking */
+    }
+    .blog-post:hover {
+      transform: translateY(-5px);
+    }
+    .blog-post h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #4b6cb7;
+    }
+    .blog-post p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* Search Input Styling */
+    .search-container {
+      margin: 20px 0;
+      text-align: center;
+      margin-left: 270px; /* Align with content */
+    }
+    #searchInput {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-  <div class="sidebar" id="sidebar">
-    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="30" fill="url(#sunGrad)" />
-      <path d="M50 20 L55 10 M50 20 L45 10 M80 50 L90 55 M80 50 L90 45 M50 80 L55 90 M50 80 L45 90 M20 50 L10 55 M20 50 L10 45 M50 20 L60 5 M50 20 L40 5 M80 50 L95 60 M80 50 L95 40 M50 80 L60 95 M50 80 L40 95 M20 50 L5 60 M20 50 L5 40" stroke="url(#rayGrad)" stroke-width="2" fill="none" />
-      <text x="50" y="85" font-family="Poppins" font-size="16" fill="#1e3a8a" text-anchor="middle" font-weight="700" letter-spacing="1.5" style="text-transform: uppercase; font-style: italic;">horizon</text>
-      <defs>
-        <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-          <stop offset="0%" style="stop-color:#ffcc00; stop-opacity:1" />
-          <stop offset="70%" style="stop-color:#ff7e5f; stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#ff5a1f; stop-opacity:0.8" />
-        </radialGradient>
-        <linearGradient id="rayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#ffcc00; stop-opacity:0.8" />
-          <stop offset="100%" style="stop-color:#ff7e5f; stop-opacity:0" />
-        </linearGradient>
-      </defs>
-    </svg>
-    <div class="slide" onclick="showCategory('Home')">🏠 Home</div>
-    <div class="slide" onclick="showCategory('News')">📰 News</div>
-    <div class="slide" onclick="showCategory('Live')">📺 Live</div>
-    <div class="slide" onclick="toggleStudy()">📚 Study</div>
-    <div class="study-group hidden ml-4" id="studyGroup">
-      <div class="slide" onclick="showCategory('10thBoardHindi')">📖 10th Board Hindi</div>
-      <div class="slide" onclick="showCategory('10thBoardEnglish')">📖 10th Board English</div>
-      <div class="slide" onclick="showCategory('12thBoardHindi')">🎓 12th Board Hindi</div>
-      <div class="slide" onclick="showCategory('12thBoardEnglish')">🎓 12th Board English</div>
-      <div class="slide" onclick="showCategory('CompetitiveHindi')">🏆 Competitive Exams Hindi</div>
-      <div class="slide" onclick="showCategory('CompetitiveEnglish')">🏆 Competitive Exams English</div>
-    </div>
-    <div class="slide" onclick="toggleWorkshop()">🔧 Workshop</div>
-    <div class="workshop-group hidden ml-4" id="workshopGroup">
-      <div class="slide" onclick="showCategory('Cafe')">☕ Cafe</div>
-      <div class="slide" onclick="showCategory('WebsiteBuilder')">🌐 Website Builder</div>
-      <div class="slide" onclick="showCategory('Editor')">✏️ Editor</div>
-      <div class="slide" onclick="showCategory('Designer')">🎨 Designer</div>
-      <div class="slide" onclick="showCategory('ContentCreator')">📝 Content Creator</div>
-      <div class="slide" onclick="showCategory('Affiliate')">💼 Affiliate</div>
-      <div class="slide" onclick="showCategory('Dropshipping')">📦 Dropshipping</div>
-      <div class="slide" onclick="showCategory('Promotion')">📣 Promotion</div>
-    </div>
-    <div class="slide" onclick="showCategory('Tech')">🚀 Tech</div>
-    <div class="slide" onclick="showCategory('Bollywood')">🎬 Bollywood</div>
-    <div class="slide" onclick="showCategory('Sports')">⚽ Sports</div>
-    <div class="slide" onclick="showCategory('Stocks')">💹 Stocks</div>
-    <div class="slide" onclick="showCategory('Entertainment')">🎭 Entertainment</div>
-    <div class="slide" onclick="showCategory('Extra')">🌟 Extra</div>
-    <div class="slide" onclick="showCategory('Contact')">📧 Contact</div>
-    <div class="slide" onclick="showCategory('Trending')">📈 Trending</div>
-    <div class="slide" onclick="showCategory('Videos')">🎥 Videos</div>
-    <div class="slide" onclick="showCategory('Politics')">🏛️ Politics</div>
-    <div class="slide" onclick="showCategory('Health')">💊 Health</div>
-  </div>
-
-  <div class="main-content" id="mainContent">
-    <div class="flex justify-between items-center mb-6">
-      <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="30" fill="url(#sunGrad)" />
-        <path d="M50 20 L55 10 M50 20 L45 10 M80 50 L90 55 M80 50 L90 45 M50 80 L55 90 M50 80 L45 90 M20 50 L10 55 M20 50 L10 45 M50 20 L60 5 M50 20 L40 5 M80 50 L95 60 M80 50 L95 40 M50 80 L60 95 M50 80 L40 95 M20 50 L5 60 M20 50 L5 40" stroke="url(#rayGrad)" stroke-width="2" fill="none" />
-        <text x="50" y="85" font-family="Poppins" font-size="16" fill="#1e3a8a" text-anchor="middle" font-weight="700" letter-spacing="1.5" style="text-transform: uppercase; font-style: italic;">horizon</text>
-        <defs>
-          <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" style="stop-color:#ffcc00; stop-opacity:1" />
-            <stop offset="70%" style="stop-color:#ff7e5f; stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#ff5a1f; stop-opacity:0.8" />
-          </radialGradient>
-          <linearGradient id="rayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#ffcc00; stop-opacity:0.8" />
-            <stop offset="100%" style="stop-color:#ff7e5f; stop-opacity:0" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <div class="right-corner flex items-center">
-        <button class="toggle-btn" onclick="toggleTheme()">🌙 Light/Dark</button>
-        <select class="translate-btn" onchange="translateInterface(this.value)">
-          <option value="en">English</option>
-          <option value="hi">हिंदी</option>
-        </select>
-        <button class="toggle-btn" onclick="openSettings()">⚙️</button>
-      </div>
-    </div>
-    <input type="text" class="search-bar mb-6" id="searchBar" placeholder="Search posts..." oninput="searchPosts()">
-    <div class="blue-section">
-      <span onclick="showCategory('Trending')">Trending</span> | 
-      <span onclick="showCategory('Videos')">Videos</span> | 
-      <span onclick="showCategory('Politics')">Politics</span> | 
-      <span onclick="showCategory('Health')">Health</span> | 
-      <span onclick="showCategory('TechNews')">Tech News</span> | 
-      <span onclick="showCategory('Business')">Business</span> | 
-      <span onclick="showCategory('Lifestyle')">Lifestyle</span> | 
-      <span onclick="showCategory('More')">More...</span>
-    </div>
-    <div class="post-section mt-6">
-      <h2 class="text-2xl font-bold mb-4">Latest 5 Posts</h2>
-      <div id="recent-posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    </div>
-  </div>
-
-  <div class="settings-modal" id="settingsModal">
-    <div class="p-6 bg-gray-100">
-      <h3 class="text-xl font-bold mb-4">⚙️ Settings</h3>
-      <button class="text-3xl float-right -mt-8" onclick="closeSettings()">×</button>
-    </div>
-    <div class="p-6">
-      <div class="settings-section">
-        <h4>👤 Account</h4>
-        <input type="text" placeholder="Username" id="loginUsername">
-        <input type="password" placeholder="Password" id="loginPassword">
-        <button onclick="handleLogin()">Login</button>
-        <button onclick="handleRegister()">Register</button>
-      </div>
-      <div class="settings-section">
-        <h4>🎨 Theme</h4>
-        <select onchange="setTheme(this.value)">
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-          <option value="system">System Default</option>
-        </select>
-      </div>
-      <div class="settings-section">
-        <h4>🌐 Language</h4>
-        <select onchange="translateInterface(this.value)">
-          <option value="en">English</option>
-          <option value="hi">Hindi</option>
-        </select>
-      </div>
-      <div class="settings-section">
-        <h4>🔔 Notifications</h4>
-        <button onclick="enableNotifications()">Enable</button>
-        <button onclick="disableNotifications()">Disable</button>
-      </div>
-      <div class="settings-section">
-        <h4>🔒 Privacy</h4>
-        <button onclick="viewPrivacyPolicy()">View Policy</button>
-      </div>
-      <div class="settings-section">
-        <h4>💰 Analytics</h4>
-        <canvas id="analyticsChart" width="300" height="200"></canvas>
-        <button id="downloadChart">Download Chart</button>
+  <div class="sidebar">
+    <div class="slider-container">
+      <div class="pagination" id="horizontalPagination"></div> <!-- Pagination above Home -->
+      <div class="slider">
+        <div class="slide">🏠 Home</div>
+        <div class="slide">🚀 Latest Tech Innovation</div>
+        <div class="slide">🎬 Bollywood Buzz</div>
+        <div class="slide">⚽ Sports Highlights</div>
+        <div class="slide">📈 Stock Market Updates</div>
+        <div class="slide">📚 Study Tips & Tricks</div>
+        <div class="slide">🌐 Extra Item 1</div> <!-- Added extra items for scrolling demo -->
+        <div class="slide">🌟 Extra Item 2</div>
       </div>
     </div>
   </div>
 
-  <footer class="footer">
-    &copy; 2025 Horizon | 
-    <a href="https://youtube.com/horizon">YouTube</a> | 
-    <a href="https://x.com/horizon">X</a> | 
-    <a href="https://facebook.com/horizon">Facebook</a> | 
-    <a href="https://instagram.com/horizon">Instagram</a> | 
-    <a href="mailto:contact@horizon.com">Email: contact@horizon.com</a> | 
-    <span>Mobile: +1-123-456-7890</span>
-  </footer>
+  <div class="logo">Horizon</div>
 
-  <div class="fixed top-4 left-4 z-50">
-    <button class="text-2xl text-white bg-gray-800 p-2 rounded" onclick="toggleSidebar()">☰</button>
+  <!-- ✅ Navigation -->
+  <div class="button-container">
+    <a href="#" class="modern-btn">News</a>
+    <a href="#" class="modern-btn">Blog</a>
+    <a href="#" class="modern-btn">Sports</a>
+    <a href="#" class="modern-btn">Entertainment</a>
+    <a href="#" class="modern-btn">Study</a>
+    <a href="#" class="modern-btn">Workshop</a>
+    <a href="#" class="modern-btn">Contact</a>
   </div>
 
-  <script src="script.js"></script>
+  <!-- ✅ Search Input -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search posts...">
+  </div>
+
+  <!-- ✅ Filter Buttons -->
+  <div class="button-container" style="margin-top: 20px;">
+    <button class="filter-btn" onclick="filterPosts('All')">All</button>
+    <button class="filter-btn" onclick="filterPosts('news')">News</button>
+    <button class="filter-btn" onclick="filterPosts('sports')">Sports</button>
+    <button class="filter-btn" onclick="filterPosts('entertainment')">Entertainment</button>
+    <button class="filter-btn" onclick="filterPosts('study')">Study</button>
+  </div>
+
+  <!-- ✅ Category Sections with Horizontal Scrolling -->
+  <div class="category-section">
+    <div class="category-title">📰 Latest News</div>
+    <div class="post-grid">
+      <div class="blog-post" data-category="news"><h4>News 1</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="news"><h4>News 2</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="news"><h4>News 3</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="news"><h4>News 4</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="news"><h4>News 5</h4><p>Short description...</p></div>
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-title">⚽ Sports</div>
+    <div class="post-grid">
+      <div class="blog-post" data-category="sports"><h4>Sports 1</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="sports"><h4>Sports 2</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="sports"><h4>Sports 3</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="sports"><h4>Sports 4</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="sports"><h4>Sports 5</h4><p>Short description...</p></div>
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-title">🎬 Entertainment</div>
+    <div class="post-grid">
+      <div class="blog-post" data-category="entertainment"><h4>Movie 1</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="entertainment"><h4>Movie 2</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="entertainment"><h4>Movie 3</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="entertainment"><h4>Movie 4</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="entertainment"><h4>Movie 5</h4><p>Short description...</p></div>
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-title">📚 Study</div>
+    <div class="post-grid">
+      <div class="blog-post" data-category="study"><h4>Study 1</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="study"><h4>Study 2</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="study"><h4>Study 3</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="study"><h4>Study 4</h4><p>Short description...</p></div>
+      <div class="blog-post" data-category="study"><h4>Study 5</h4><p>Short description...</p></div>
+    </div>
+  </div>
+
+  <script>
+    // Horizontal Pagination (for left-to-right scrolling)
+    const sidebar = document.querySelector('.sidebar');
+    const slider = document.querySelector('.slider');
+    const horizontalPagination = document.getElementById('horizontalPagination');
+    const horizontalItems = slider.children;
+    const horizontalItemsPerPage = 4; // 4 items per "page" horizontally
+    let horizontalCurrentPage = 0;
+
+    function setupHorizontalPagination() {
+      const totalHorizontalPages = Math.ceil(horizontalItems.length / horizontalItemsPerPage);
+      for (let i = 0; i < 3; i++) { // Fixed 3 dots
+        const dot = document.createElement('div');
+        dot.classList.add('pagination-dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          horizontalCurrentPage = i;
+          updateHorizontalPagination();
+          const scrollPosition = i * (sidebar.clientWidth * (horizontalItemsPerPage / horizontalItems.length) * 100); // Adjusted scroll
+          sidebar.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+        });
+        horizontalPagination.appendChild(dot);
+      }
+    }
+
+    function updateHorizontalPagination() {
+      const dots = horizontalPagination.children;
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].classList.toggle('active', i === horizontalCurrentPage);
+      }
+    }
+
+    // Initialize
+    setupHorizontalPagination();
+
+    // Update pagination on scroll
+    sidebar.addEventListener('scroll', () => {
+      const horizontalScrollPosition = sidebar.scrollLeft;
+      const maxScroll = sidebar.scrollWidth - sidebar.clientWidth;
+      if (horizontalScrollPosition <= maxScroll / 3) horizontalCurrentPage = 0;
+      else if (horizontalScrollPosition <= (2 * maxScroll) / 3) horizontalCurrentPage = 1;
+      else horizontalCurrentPage = 2;
+      updateHorizontalPagination();
+    });
+
+    // Search and Filter Functions
+    function toggleSidebar() {
+      const sidebar = document.querySelector(".sidebar");
+      if (sidebar) sidebar.classList.toggle("active");
+    }
+
+    function searchPosts() {
+      const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
+      const posts = document.querySelectorAll('.blog-post');
+      posts.forEach(post => {
+        const text = post.textContent.toLowerCase();
+        post.style.display = text.includes(searchTerm) ? 'block' : 'none';
+      });
+    }
+
+    function filterPosts(category) {
+      const posts = document.querySelectorAll('.blog-post');
+      posts.forEach(post => {
+        const categories = post.getAttribute('data-category')?.toLowerCase() || '';
+        post.style.display = (category === 'All' || categories.includes(category.toLowerCase())) ? 'block' : 'none';
+      });
+    }
+
+    window.onload = function() {
+      filterPosts('All');
+      document.getElementById('searchInput')?.addEventListener('input', searchPosts);
+    };
+  </script>
 </body>
 </html>
+
+  
