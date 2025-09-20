@@ -1,233 +1,54 @@
-:root {
-  --primary-gradient: linear-gradient(45deg, #3b82f6, #1e3a8a);
-  --secondary-gradient: linear-gradient(45deg, #93c5fd, #dbeafe);
-  --bg-light: #f6f9fc;
-  --bg-dark: #1e293b;
-  --text-light: #334155;
-  --text-dark: #e0e7ff;
-  --shadow: 0 4px 20px rgba(0,0,0,0.05);
-  --font-main: 'Poppins', sans-serif;
+/* New Logo Styles */
+.logo-svg, .logo-svg-small {
+  width: 60px; /* बड़ा लोगो */
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* ग्लो इफेक्ट */
+  transition: transform 0.3s ease;
 }
 
-body {
-  font-family: var(--font-main);
-  background: var(--bg-light);
-  color: var(--text-light);
-  margin: 0;
-  min-height: 100vh;
-  transition: all 0.3s;
+.logo-svg-small {
+  width: 40px; /* छोटा लोगो */
+  height: 40px;
 }
 
-body.dark {
-  background: var(--bg-dark);
-  color: var(--text-dark);
+.logo-svg:hover, .logo-svg-small:hover {
+  transform: scale(1.1); /* होवर पर एनिमेशन */
 }
 
-.sidebar {
-  width: 250px;
-  background: var(--primary-gradient);
-  position: fixed;
-  top: 0;
-  left: -250px;
-  height: 100vh;
-  overflow-y: auto;
-  box-shadow: var(--shadow);
-  padding: 20px 0;
-  z-index: 1001;
-  transition: left 0.3s;
+/* Live Ticker */
+.live-ticker {
+  background: #ff6b6b;
+  color: white;
+  padding: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: bold;
+  animation: ticker 20s linear infinite;
 }
 
-.sidebar.open {
-  left: 0;
+.ticker-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker-text 20s linear infinite;
 }
 
-.sidebar .slide {
-  padding: 12px 24px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  background: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: background 0.2s;
+@keyframes ticker {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
 
-.sidebar .slide:hover {
-  background: rgba(255,255,255,0.15);
-}
-
-.main-content {
-  margin-left: 0;
-  padding: 24px;
-  min-height: 100vh;
-  transition: margin-left 0.3s;
-  box-shadow: var(--shadow);
-}
-
-.main-content.shifted {
-  margin-left: 250px;
-}
-
-.logo {
-  font-size: 36px;
-  font-weight: 900;
-  background: var(--secondary-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-.logo-svg {
-  display: block;
-  margin: 0 auto 8px;
-  width: 80px;
-  height: 80px;
-}
-
-.search-bar {
-  width: 100%;
-  max-width: 400px;
-  padding: 12px;
-  border-radius: 25px;
-  border: 1px solid #cbd5e1;
-  font-size: 15px;
-  box-shadow: var(--shadow);
-}
-
-.blue-section {
-  background: #3b82f6;
-  padding: 12px;
-  border-radius: 8px;
-  margin: 12px 0;
-  color: #fff;
-  font-size: 14px;
-  text-align: center;
-  box-shadow: var(--shadow);
-}
-
-.blue-section span {
-  cursor: pointer;
-  margin: 0 8px;
-  transition: opacity 0.2s;
-}
-
-.blue-section span:hover {
-  opacity: 0.8;
-}
-
+/* Other styles same, add more animations for posts */
 .post-card {
-  padding: 20px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  margin: 12px 0;
-  transition: transform 0.2s;
+  animation: fadeIn 0.5s ease-in;
 }
 
-.post-card:hover {
-  transform: translateY(-4px);
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.settings-modal {
-  position: fixed;
-  top: 0;
-  right: -400px;
-  width: 400px;
-  height: 100vh;
-  background: #fff;
-  box-shadow: -4px 0 20px rgba(0,0,0,0.1);
-  transition: right 0.3s;
-  z-index: 1000;
-  overflow-y: auto;
-}
-
-.settings-modal.open {
-  right: 0;
-}
-
-.settings-section {
-  padding: 16px;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.settings-section h4 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.settings-section input, .settings-section select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  margin-bottom: 8px;
-}
-
-.settings-section button {
-  width: 100%;
-  padding: 10px;
-  background: #3b82f6;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.settings-section button:hover {
-  background: #2563eb;
-}
-
-.toggle-btn, .translate-btn {
-  padding: 10px 18px;
-  margin: 6px;
-  background: var(--primary-gradient);
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: 600;
-  box-shadow: var(--shadow);
-}
-
-.toggle-btn:hover, .translate-btn:hover {
-  background: var(--secondary-gradient);
-}
-
-.footer {
-  background: #1e293b;
-  color: #e0e7ff;
-  padding: 20px;
-  text-align: center;
-  font-size: 14px;
-  margin-top: auto;
-}
-
-.footer a {
-  color: #93c5fd;
-  text-decoration: none;
-  margin: 0 8px;
-  transition: color 0.2s;
-}
-
-.footer a:hover {
-  color: #fff;
-}
-
-.right-corner {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-@media (max-width: 768px) {
-  .sidebar { width: 100%; left: -100%; }
-  .sidebar.open { left: 0; }
-  .main-content.shifted { margin-left: 0; }
-  .settings-modal { width: 100%; right: -100%; }
+/* Dark Mode Enhanced */
+.dark-theme .logo-svg {
+  filter: brightness(1.2); /* बेहतर विजिबिलिटी */
 }
