@@ -3,29 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Horizon - World's Best News Platform | 2025</title>
-  <meta name="description" content="Real-time news, personalized feeds, and expert insights. Stay ahead with Horizon.">
+  <title>Horizon - News Platform</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Mobile Menu Toggle -->
-  <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleSidebar()" aria-label="Toggle Menu">
-    <span class="menu-line"></span>
-    <span class="menu-line"></span>
-    <span class="menu-line"></span>
-  </button>
+  <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleSidebar()">☰</button>
 
-  <!-- COMPLETE SIDEBAR - सभी options के साथ -->
+  <!-- COMPLETE SIDEBAR WITH ALL ONCLICK -->
   <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <!-- नया लोगो - image path सही करें -->
-      <img src="logo.png" alt="Horizon Logo" class="logo-svg" loading="lazy">
+      <img src="logo.png" alt="Horizon Logo" class="logo-svg">
       <button class="sidebar-close-btn" onclick="toggleSidebar()">×</button>
     </div>
 
     <nav class="sidebar-nav">
-      <!-- Home -->
+      <!-- 1. HOME -->
       <div class="nav-group">
         <div class="slide active" onclick="showCategory('Home')">
           <span class="nav-icon">🏠</span>
@@ -33,7 +26,7 @@
         </div>
       </div>
 
-      <!-- News -->
+      <!-- 2. NEWS SECTION -->
       <div class="nav-group">
         <div class="slide" onclick="showCategory('News')">
           <span class="nav-icon">📰</span>
@@ -45,121 +38,146 @@
         </div>
       </div>
 
-      <!-- Study (Expandable) -->
+      <!-- 3. STUDY SECTION (Expandable) -->
       <div class="nav-group expandable">
-        <div class="slide" onclick="toggleStudy()">
+        <div class="slide" onclick="toggleStudy(); return false;">
           <span class="nav-icon">📚</span>
           <span class="nav-text">Study</span>
           <span class="expand-icon">▼</span>
         </div>
         <div class="study-group hidden ml-4" id="studyGroup">
           <div class="slide sub-slide" onclick="showCategory('10thBoardHindi')">
-            <span class="nav-icon">📖</span> <span class="nav-text">10th Board Hindi</span>
+            <span class="nav-icon">📖</span>
+            <span class="nav-text">10th Board Hindi</span>
           </div>
           <div class="slide sub-slide" onclick="showCategory('10thBoardEnglish')">
-            <span class="nav-icon">📖</span> <span class="nav-text">10th Board English</span>
+            <span class="nav-icon">📖</span>
+            <span class="nav-text">10th Board English</span>
           </div>
           <div class="slide sub-slide" onclick="showCategory('12thBoardHindi')">
-            <span class="nav-icon">🎓</span> <span class="nav-text">12th Board Hindi</span>
+            <span class="nav-icon">🎓</span>
+            <span class="nav-text">12th Board Hindi</span>
           </div>
           <div class="slide sub-slide" onclick="showCategory('12thBoardEnglish')">
-            <span class="nav-icon">🎓</span> <span class="nav-text">12th Board English</span>
+            <span class="nav-icon">🎓</span>
+            <span class="nav-text">12th Board English</span>
           </div>
           <div class="slide sub-slide" onclick="showCategory('CompetitiveHindi')">
-            <span class="nav-icon">🏆</span> <span class="nav-text">Competitive Hindi</span>
+            <span class="nav-icon">🏆</span>
+            <span class="nav-text">Competitive Hindi</span>
           </div>
           <div class="slide sub-slide" onclick="showCategory('CompetitiveEnglish')">
-            <span class="nav-icon">🏆</span> <span class="nav-text">Competitive English</span>
+            <span class="nav-icon">🏆</span>
+            <span class="nav-text">Competitive English</span>
           </div>
         </div>
       </div>
 
-      <!-- Workshop (Expandable) -->
+      <!-- 4. WORKSHOP SECTION (Expandable) -->
       <div class="nav-group expandable">
-        <div class="slide" onclick="toggleWorkshop()">
+        <div class="slide" onclick="toggleWorkshop(); return false;">
           <span class="nav-icon">🔧</span>
           <span class="nav-text">Workshop</span>
           <span class="expand-icon">▼</span>
         </div>
         <div class="workshop-group hidden ml-4" id="workshopGroup">
           <div class="slide sub-slide" onclick="showCategory('Cafe')">
-            <span class="nav-icon">☕</span> <span class="nav-text">Cafe</span>
+            <span class="nav-icon">☕</span>
+            <span class="nav-text">Cafe</span>
           </div>
           <div class="slide sub-slide" onclick="showCategory('WebsiteBuilder')">
-            <span class="nav-icon">🌐</span> <span class="nav-text">Website Builder</span>
+            <span class="nav-icon">🌐</span>
+            <span class="nav-text">Website Builder</span>
           </div>
           <div class="slide sub-slide" onclick="showCategory('Editor')">
-            <span class="nav-icon">✏️</span> <span class="nav-text">Editor</span>
+            <span class="nav-icon">✏️</span>
+            <span class="nav-text">Editor</span>
           </div>
           <div class="slide sub-slide" onclick="showCategory('Designer')">
-            <span class="nav-icon">🎨</span> <span class="nav-text">Designer</span>
+            <span class="nav-icon">🎨</span>
+            <span class="nav-text">Designer</span>
           </div>
           <div class="slide sub-slide" onclick="showCategory('ContentCreator')">
-            <span class="nav-icon">📝</span> <span class="nav-text">Content Creator</span>
+            <span class="nav-icon">📝</span>
+            <span class="nav-text">Content Creator</span>
           </div>
           <div class="slide sub-slide" onclick="showCategory('Affiliate')">
-            <span class="nav-icon">💼</span> <span class="nav-text">Affiliate</span>
+            <span class="nav-icon">💼</span>
+            <span class="nav-text">Affiliate</span>
           </div>
           <div class="slide sub-slide" onclick="showCategory('Dropshipping')">
-            <span class="nav-icon">📦</span> <span class="nav-text">Dropshipping</span>
+            <span class="nav-icon">📦</span>
+            <span class="nav-text">Dropshipping</span>
           </div>
           <div class="slide sub-slide" onclick="showCategory('Promotion')">
-            <span class="nav-icon">📣</span> <span class="nav-text">Promotion</span>
+            <span class="nav-icon">📣</span>
+            <span class="nav-text">Promotion</span>
           </div>
         </div>
       </div>
 
-      <!-- Other Categories -->
+      <!-- 5. OTHER CATEGORIES -->
       <div class="nav-group">
         <div class="slide" onclick="showCategory('Tech')">
-          <span class="nav-icon">🚀</span> <span class="nav-text">Tech</span>
+          <span class="nav-icon">🚀</span>
+          <span class="nav-text">Tech</span>
         </div>
         <div class="slide" onclick="showCategory('Bollywood')">
-          <span class="nav-icon">🎬</span> <span class="nav-text">Bollywood</span>
+          <span class="nav-icon">🎬</span>
+          <span class="nav-text">Bollywood</span>
         </div>
         <div class="slide" onclick="showCategory('Sports')">
-          <span class="nav-icon">⚽</span> <span class="nav-text">Sports</span>
+          <span class="nav-icon">⚽</span>
+          <span class="nav-text">Sports</span>
         </div>
         <div class="slide" onclick="showCategory('Stocks')">
-          <span class="nav-icon">💹</span> <span class="nav-text">Stocks</span>
+          <span class="nav-icon">💹</span>
+          <span class="nav-text">Stocks</span>
         </div>
         <div class="slide" onclick="showCategory('Entertainment')">
-          <span class="nav-icon">🎭</span> <span class="nav-text">Entertainment</span>
+          <span class="nav-icon">🎭</span>
+          <span class="nav-text">Entertainment</span>
         </div>
         <div class="slide" onclick="showCategory('Extra')">
-          <span class="nav-icon">🌟</span> <span class="nav-text">Extra</span>
+          <span class="nav-icon">🌟</span>
+          <span class="nav-text">Extra</span>
         </div>
         <div class="slide" onclick="showCategory('Contact')">
-          <span class="nav-icon">📧</span> <span class="nav-text">Contact</span>
+          <span class="nav-icon">📧</span>
+          <span class="nav-text">Contact</span>
         </div>
         <div class="slide" onclick="showCategory('Trending')">
-          <span class="nav-icon">📈</span> <span class="nav-text">Trending</span>
+          <span class="nav-icon">📈</span>
+          <span class="nav-text">Trending</span>
         </div>
         <div class="slide" onclick="showCategory('Videos')">
-          <span class="nav-icon">🎥</span> <span class="nav-text">Videos</span>
+          <span class="nav-icon">🎥</span>
+          <span class="nav-text">Videos</span>
         </div>
         <div class="slide" onclick="showCategory('Politics')">
-          <span class="nav-icon">🏛️</span> <span class="nav-text">Politics</span>
+          <span class="nav-icon">🏛️</span>
+          <span class="nav-text">Politics</span>
         </div>
         <div class="slide" onclick="showCategory('Health')">
-          <span class="nav-icon">💊</span> <span class="nav-text">Health</span>
+          <span class="nav-icon">💊</span>
+          <span class="nav-text">Health</span>
         </div>
       </div>
 
-      <!-- Footer -->
+      <!-- FOOTER -->
       <div class="sidebar-footer">
         <button class="login-btn" onclick="openSettings()">Login</button>
         <div class="social-links">
-          <a href="#" class="social-link">📘</a>
-          <a href="#" class="social-link">🐦</a>
-          <a href="#" class="social-link">📷</a>
-          <a href="#" class="social-link">📧</a>
+          <a href="#" onclick="shareOnFacebook()" class="social-link">📘</a>
+          <a href="#" onclick="shareOnTwitter()" class="social-link">🐦</a>
+          <a href="#" onclick="shareOnInstagram()" class="social-link">📷</a>
+          <a href="mailto:contact@horizon.com" class="social-link">📧</a>
         </div>
       </div>
     </nav>
   </div>
 
-  <!-- Main Content -->
+  <!-- MAIN CONTENT -->
   <main class="main-content" id="mainContent">
     <header class="header">
       <div class="flex justify-between items-center mb-6">
@@ -175,28 +193,28 @@
       </div>
     </header>
 
-    <!-- Search -->
+    <!-- SEARCH BAR -->
     <div class="search-container mb-6">
       <input type="text" class="search-bar" id="searchBar" placeholder="Search news..." oninput="searchPosts()">
     </div>
 
-    <!-- Category Tabs -->
+    <!-- CATEGORY TABS -->
     <div class="blue-section mb-6">
-      <span onclick="showCategory('Trending')">Trending</span> | 
-      <span onclick="showCategory('Videos')">Videos</span> | 
-      <span onclick="showCategory('Politics')">Politics</span> | 
-      <span onclick="showCategory('Health')">Health</span> | 
-      <span onclick="showCategory('Tech')">Tech News</span> | 
-      <span onclick="showCategory('Stocks')">Business</span> | 
-      <span onclick="showCategory('Bollywood')">Lifestyle</span> | 
-      <span onclick="showCategory('More')">More...</span>
+      <span onclick="showCategory('Trending')">📈 Trending</span> | 
+      <span onclick="showCategory('Videos')">🎥 Videos</span> | 
+      <span onclick="showCategory('Politics')">🏛️ Politics</span> | 
+      <span onclick="showCategory('Health')">💊 Health</span> | 
+      <span onclick="showCategory('Tech')">🚀 Tech News</span> | 
+      <span onclick="showCategory('Stocks')">💹 Business</span> | 
+      <span onclick="showCategory('Bollywood')">🎬 Lifestyle</span> | 
+      <span onclick="showCategory('More')">⋮ More...</span>
     </div>
 
-    <!-- Posts Section -->
+    <!-- POSTS SECTION -->
     <section class="post-section">
       <h2 class="text-2xl font-bold mb-4" id="page-title">Latest News</h2>
-      <div id="recent-posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Dynamic content loaded by JS -->
+      <div id="recent-posts" class="grid">
+        <!-- Content loads here -->
       </div>
       <div id="load-more" class="text-center py-4 hidden">
         <button onclick="loadMorePosts()" class="load-more-btn">Load More</button>
@@ -204,40 +222,52 @@
     </section>
   </main>
 
-  <!-- Comments Modal - सिर्फ open होने पर दिखे -->
+  <!-- COMMENTS MODAL -->
   <div class="comments-modal hidden" id="commentsModal">
     <div class="modal-content">
       <div class="flex justify-between items-center mb-4">
         <h3 id="comment-title">Comments</h3>
         <button onclick="closeComments()" class="close-btn">×</button>
       </div>
-      <div id="comments-list"></div>
-      <form id="comment-form" class="mt-4">
-        <textarea placeholder="Add comment..." rows="3"></textarea>
-        <button type="submit">Post Comment</button>
+      <div id="comments-list" class="mb-4">
+        <p class="text-gray-500">No comments yet. Be the first!</p>
+      </div>
+      <form id="comment-form">
+        <textarea placeholder="Add your comment..." rows="3" class="w-full p-2 border rounded mb-2"></textarea>
+        <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Post Comment</button>
       </form>
     </div>
   </div>
 
-  <!-- Settings Modal -->
+  <!-- SETTINGS MODAL -->
   <div class="settings-modal hidden" id="settingsModal">
     <div class="modal-content">
       <div class="flex justify-between items-center mb-4">
         <h3>⚙️ Settings</h3>
         <button onclick="closeSettings()" class="close-btn">×</button>
       </div>
+      
       <div class="settings-section">
         <h4>👤 Account</h4>
-        <input type="text" id="loginUsername" placeholder="Username">
-        <input type="password" id="loginPassword" placeholder="Password">
-        <button onclick="handleLogin()">Login</button>
+        <input type="text" id="loginUsername" placeholder="Username" class="w-full p-2 border rounded mb-2">
+        <input type="password" id="loginPassword" placeholder="Password" class="w-full p-2 border rounded mb-2">
+        <button onclick="handleLogin()" class="w-full bg-green-500 text-white p-2 rounded">Login</button>
       </div>
+      
       <div class="settings-section">
         <h4>🎨 Theme</h4>
-        <select onchange="setTheme(this.value)">
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-          <option value="system">System</option>
+        <select onchange="setTheme(this.value)" class="w-full p-2 border rounded">
+          <option value="light">Light Mode</option>
+          <option value="dark">Dark Mode</option>
+          <option value="system">System Default</option>
+        </select>
+      </div>
+      
+      <div class="settings-section">
+        <h4>🌐 Language</h4>
+        <select onchange="translateInterface(this.value)" class="w-full p-2 border rounded">
+          <option value="en">English</option>
+          <option value="hi">हिंदी</option>
         </select>
       </div>
     </div>
