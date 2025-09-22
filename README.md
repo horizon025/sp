@@ -1,1 +1,1 @@
-# horizon plus
+# horizon
