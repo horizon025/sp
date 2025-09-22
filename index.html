@@ -3,260 +3,280 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Horizon News - Your source for the latest news, updates, and insights across various categories.">
+  <meta name="keywords" content="news, tech, sports, bollywood, health, politics">
+  <meta name="author" content="Horizon News Team">
+  <meta property="og:title" content="Horizon News">
+  <meta property="og:description" content="Stay updated with the latest news and trends.">
+  <meta property="og:image" content="/images/logo.png">
+  <meta property="og:url" content="https://horizon-news.com">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com; img-src 'self' https://picsum.photos; connect-src 'self' https://newsapi.org;">
   <title>Horizon - News Platform</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.ico">
 </head>
 <body>
   <!-- Mobile Menu Toggle -->
-  <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleSidebar()">☰</button>
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+    <span class="menu-line"></span>
+    <span class="menu-line"></span>
+    <span class="menu-line"></span>
+  </button>
 
-  <!-- COMPLETE SIDEBAR WITH ALL ONCLICK -->
-  <div class="sidebar" id="sidebar">
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar" aria-label="Main navigation">
     <div class="sidebar-header">
-      <img src="logo.png" alt="Horizon Logo" class="logo-svg">
-      <button class="sidebar-close-btn" onclick="toggleSidebar()">×</button>
+      <img src="images/logo.png" alt="Horizon Logo" class="logo-svg">
+      <button class="sidebar-close-btn" aria-label="Close sidebar">×</button>
     </div>
 
     <nav class="sidebar-nav">
-      <!-- 1. HOME -->
+      <!-- Home -->
       <div class="nav-group">
-        <div class="slide active" onclick="showCategory('Home')">
-          <span class="nav-icon">🏠</span>
+        <div class="slide active" data-category="Home" role="button" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">🏠</span>
           <span class="nav-text">Home</span>
         </div>
       </div>
 
-      <!-- 2. NEWS SECTION -->
+      <!-- News Section -->
       <div class="nav-group">
-        <div class="slide" onclick="showCategory('News')">
-          <span class="nav-icon">📰</span>
+        <div class="slide" data-category="News" role="button">
+          <span class="nav-icon" aria-hidden="true">📰</span>
           <span class="nav-text">News</span>
         </div>
-        <div class="slide sub-slide" onclick="showCategory('Live')">
-          <span class="nav-icon ml-6">📺</span>
+        <div class="slide sub-slide" data-category="Live" role="button">
+          <span class="nav-icon ml-6" aria-hidden="true">📺</span>
           <span class="nav-text ml-2">Live</span>
         </div>
       </div>
 
-      <!-- 3. STUDY SECTION (Expandable) -->
+      <!-- Study Section (Expandable) -->
       <div class="nav-group expandable">
-        <div class="slide" onclick="toggleStudy(); return false;">
-          <span class="nav-icon">📚</span>
+        <div class="slide" data-toggle="study" role="button" aria-expanded="false">
+          <span class="nav-icon" aria-hidden="true">📚</span>
           <span class="nav-text">Study</span>
           <span class="expand-icon">▼</span>
         </div>
         <div class="study-group hidden ml-4" id="studyGroup">
-          <div class="slide sub-slide" onclick="showCategory('10thBoardHindi')">
-            <span class="nav-icon">📖</span>
+          <div class="slide sub-slide" data-category="10thBoardHindi" role="button">
+            <span class="nav-icon" aria-hidden="true">📖</span>
             <span class="nav-text">10th Board Hindi</span>
           </div>
-          <div class="slide sub-slide" onclick="showCategory('10thBoardEnglish')">
-            <span class="nav-icon">📖</span>
+          <div class="slide sub-slide" data-category="10thBoardEnglish" role="button">
+            <span class="nav-icon" aria-hidden="true">📖</span>
             <span class="nav-text">10th Board English</span>
           </div>
-          <div class="slide sub-slide" onclick="showCategory('12thBoardHindi')">
-            <span class="nav-icon">🎓</span>
+          <div class="slide sub-slide" data-category="12thBoardHindi" role="button">
+            <span class="nav-icon" aria-hidden="true">🎓</span>
             <span class="nav-text">12th Board Hindi</span>
           </div>
-          <div class="slide sub-slide" onclick="showCategory('12thBoardEnglish')">
-            <span class="nav-icon">🎓</span>
+          <div class="slide sub-slide" data-category="12thBoardEnglish" role="button">
+            <span class="nav-icon" aria-hidden="true">🎓</span>
             <span class="nav-text">12th Board English</span>
           </div>
-          <div class="slide sub-slide" onclick="showCategory('CompetitiveHindi')">
-            <span class="nav-icon">🏆</span>
+          <div class="slide sub-slide" data-category="CompetitiveHindi" role="button">
+            <span class="nav-icon" aria-hidden="true">🏆</span>
             <span class="nav-text">Competitive Hindi</span>
           </div>
-          <div class="slide sub-slide" onclick="showCategory('CompetitiveEnglish')">
-            <span class="nav-icon">🏆</span>
+          <div class="slide sub-slide" data-category="CompetitiveEnglish" role="button">
+            <span class="nav-icon" aria-hidden="true">🏆</span>
             <span class="nav-text">Competitive English</span>
           </div>
         </div>
       </div>
 
-      <!-- 4. WORKSHOP SECTION (Expandable) -->
+      <!-- Workshop Section (Expandable) -->
       <div class="nav-group expandable">
-        <div class="slide" onclick="toggleWorkshop(); return false;">
-          <span class="nav-icon">🔧</span>
+        <div class="slide" data-toggle="workshop" role="button" aria-expanded="false">
+          <span class="nav-icon" aria-hidden="true">🔧</span>
           <span class="nav-text">Workshop</span>
           <span class="expand-icon">▼</span>
         </div>
         <div class="workshop-group hidden ml-4" id="workshopGroup">
-          <div class="slide sub-slide" onclick="showCategory('Cafe')">
-            <span class="nav-icon">☕</span>
+          <div class="slide sub-slide" data-category="Cafe" role="button">
+            <span class="nav-icon" aria-hidden="true">☕</span>
             <span class="nav-text">Cafe</span>
           </div>
-          <div class="slide sub-slide" onclick="showCategory('WebsiteBuilder')">
-            <span class="nav-icon">🌐</span>
+          <div class="slide sub-slide" data-category="WebsiteBuilder" role="button">
+            <span class="nav-icon" aria-hidden="true">🌐</span>
             <span class="nav-text">Website Builder</span>
           </div>
-          <div class="slide sub-slide" onclick="showCategory('Editor')">
-            <span class="nav-icon">✏️</span>
+          <div class="slide sub-slide" data-category="Editor" role="button">
+            <span class="nav-icon" aria-hidden="true">✏️</span>
             <span class="nav-text">Editor</span>
           </div>
-          <div class="slide sub-slide" onclick="showCategory('Designer')">
-            <span class="nav-icon">🎨</span>
+          <div class="slide sub-slide" data-category="Designer" role="button">
+            <span class="nav-icon" aria-hidden="true">🎨</span>
             <span class="nav-text">Designer</span>
           </div>
-          <div class="slide sub-slide" onclick="showCategory('ContentCreator')">
-            <span class="nav-icon">📝</span>
+          <div class="slide sub-slide" data-category="ContentCreator" role="button">
+            <span class="nav-icon" aria-hidden="true">📝</span>
             <span class="nav-text">Content Creator</span>
           </div>
-          <div class="slide sub-slide" onclick="showCategory('Affiliate')">
-            <span class="nav-icon">💼</span>
+          <div class="slide sub-slide" data-category="Affiliate" role="button">
+            <span class="nav-icon" aria-hidden="true">💼</span>
             <span class="nav-text">Affiliate</span>
           </div>
-          <div class="slide sub-slide" onclick="showCategory('Dropshipping')">
-            <span class="nav-icon">📦</span>
+          <div class="slide sub-slide" data-category="Dropshipping" role="button">
+            <span class="nav-icon" aria-hidden="true">📦</span>
             <span class="nav-text">Dropshipping</span>
           </div>
-          <div class="slide sub-slide" onclick="showCategory('Promotion')">
-            <span class="nav-icon">📣</span>
+          <div class="slide sub-slide" data-category="Promotion" role="button">
+            <span class="nav-icon" aria-hidden="true">📣</span>
             <span class="nav-text">Promotion</span>
           </div>
         </div>
       </div>
 
-      <!-- 5. OTHER CATEGORIES -->
+      <!-- Other Categories -->
       <div class="nav-group">
-        <div class="slide" onclick="showCategory('Tech')">
-          <span class="nav-icon">🚀</span>
+        <div class="slide" data-category="Tech" role="button">
+          <span class="nav-icon" aria-hidden="true">🚀</span>
           <span class="nav-text">Tech</span>
         </div>
-        <div class="slide" onclick="showCategory('Bollywood')">
-          <span class="nav-icon">🎬</span>
+        <div class="slide" data-category="Bollywood" role="button">
+          <span class="nav-icon" aria-hidden="true">🎬</span>
           <span class="nav-text">Bollywood</span>
         </div>
-        <div class="slide" onclick="showCategory('Sports')">
-          <span class="nav-icon">⚽</span>
+        <div class="slide" data-category="Sports" role="button">
+          <span class="nav-icon" aria-hidden="true">⚽</span>
           <span class="nav-text">Sports</span>
         </div>
-        <div class="slide" onclick="showCategory('Stocks')">
-          <span class="nav-icon">💹</span>
+        <div class="slide" data-category="Stocks" role="button">
+          <span class="nav-icon" aria-hidden="true">💹</span>
           <span class="nav-text">Stocks</span>
         </div>
-        <div class="slide" onclick="showCategory('Entertainment')">
-          <span class="nav-icon">🎭</span>
+        <div class="slide" data-category="Entertainment" role="button">
+          <span class="nav-icon" aria-hidden="true">🎭</span>
           <span class="nav-text">Entertainment</span>
         </div>
-        <div class="slide" onclick="showCategory('Extra')">
-          <span class="nav-icon">🌟</span>
+        <div class="slide" data-category="Extra" role="button">
+          <span class="nav-icon" aria-hidden="true">🌟</span>
           <span class="nav-text">Extra</span>
         </div>
-        <div class="slide" onclick="showCategory('Contact')">
-          <span class="nav-icon">📧</span>
+        <div class="slide" data-category="Contact" role="button">
+          <span class="nav-icon" aria-hidden="true">📧</span>
           <span class="nav-text">Contact</span>
         </div>
-        <div class="slide" onclick="showCategory('Trending')">
-          <span class="nav-icon">📈</span>
+        <div class="slide" data-category="Trending" role="button">
+          <span class="nav-icon" aria-hidden="true">📈</span>
           <span class="nav-text">Trending</span>
         </div>
-        <div class="slide" onclick="showCategory('Videos')">
-          <span class="nav-icon">🎥</span>
+        <div class="slide" data-category="Videos" role="button">
+          <span class="nav-icon" aria-hidden="true">🎥</span>
           <span class="nav-text">Videos</span>
         </div>
-        <div class="slide" onclick="showCategory('Politics')">
-          <span class="nav-icon">🏛️</span>
+        <div class="slide" data-category="Politics" role="button">
+          <span class="nav-icon" aria-hidden="true">🏛️</span>
           <span class="nav-text">Politics</span>
         </div>
-        <div class="slide" onclick="showCategory('Health')">
-          <span class="nav-icon">💊</span>
+        <div class="slide" data-category="Health" role="button">
+          <span class="nav-icon" aria-hidden="true">💊</span>
           <span class="nav-text">Health</span>
         </div>
       </div>
 
-      <!-- FOOTER -->
+      <!-- Footer -->
       <div class="sidebar-footer">
-        <button class="login-btn" onclick="openSettings()">Login</button>
+        <button class="login-btn" id="loginBtn">Login</button>
         <div class="social-links">
-          <a href="#" onclick="shareOnFacebook()" class="social-link">📘</a>
-          <a href="#" onclick="shareOnTwitter()" class="social-link">🐦</a>
-          <a href="#" onclick="shareOnInstagram()" class="social-link">📷</a>
-          <a href="mailto:contact@horizon.com" class="social-link">📧</a>
+          <a href="#" class="social-link" aria-label="Share on Facebook">📘</a>
+          <a href="#" class="social-link" aria-label="Share on Twitter">🐦</a>
+          <a href="#" class="social-link" aria-label="Share on Instagram">📷</a>
+          <a href="mailto:contact@horizon.com" class="social-link" aria-label="Email us">📧</a>
+        </div>
+        <div class="newsletter">
+          <h4>Subscribe to Newsletter</h4>
+          <form id="newsletter-form">
+            <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter">
+            <button type="submit">Subscribe</button>
+          </form>
         </div>
       </div>
     </nav>
   </div>
 
-  <!-- MAIN CONTENT -->
+  <!-- Main Content -->
   <main class="main-content" id="mainContent">
     <header class="header">
       <div class="flex justify-between items-center mb-6">
-        <img src="logo.png" alt="Horizon Logo" class="logo-svg-small">
+        <img src="images/logo.png" alt="Horizon Logo" class="logo-svg-small">
         <div class="right-corner">
-          <button class="toggle-btn" onclick="toggleTheme()">🌙</button>
-          <select class="translate-btn" onchange="translateInterface(this.value)">
+          <button class="toggle-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+          <select class="translate-btn" aria-label="Select language">
             <option value="en">EN</option>
             <option value="hi">हिं</option>
           </select>
-          <button class="toggle-btn" onclick="openSettings()">⚙️</button>
+          <button class="toggle-btn" id="settingsBtn" aria-label="Open settings">⚙️</button>
         </div>
       </div>
     </header>
 
-    <!-- SEARCH BAR -->
+    <!-- Search Bar -->
     <div class="search-container mb-6">
-      <input type="text" class="search-bar" id="searchBar" placeholder="Search news..." oninput="searchPosts()">
+      <input type="text" class="search-bar" id="searchBar" placeholder="Search news..." aria-label="Search news">
     </div>
 
-    <!-- CATEGORY TABS -->
+    <!-- Category Tabs -->
     <div class="blue-section mb-6">
-      <span onclick="showCategory('Trending')">📈 Trending</span> | 
-      <span onclick="showCategory('Videos')">🎥 Videos</span> | 
-      <span onclick="showCategory('Politics')">🏛️ Politics</span> | 
-      <span onclick="showCategory('Health')">💊 Health</span> | 
-      <span onclick="showCategory('Tech')">🚀 Tech News</span> | 
-      <span onclick="showCategory('Stocks')">💹 Business</span> | 
-      <span onclick="showCategory('Bollywood')">🎬 Lifestyle</span> | 
-      <span onclick="showCategory('More')">⋮ More...</span>
+      <span data-category="Trending">📈 Trending</span> | 
+      <span data-category="Videos">🎥 Videos</span> | 
+      <span data-category="Politics">🏛️ Politics</span> | 
+      <span data-category="Health">💊 Health</span> | 
+      <span data-category="Tech">🚀 Tech News</span> | 
+      <span data-category="Stocks">💹 Business</span> | 
+      <span data-category="Bollywood">🎬 Lifestyle</span> | 
+      <span data-category="More">⋮ More...</span>
     </div>
 
-    <!-- POSTS SECTION -->
+    <!-- Posts Section -->
     <section class="post-section">
       <h2 class="text-2xl font-bold mb-4" id="page-title">Latest News</h2>
-      <div id="recent-posts" class="grid">
-        <!-- Content loads here -->
-      </div>
+      <div id="recent-posts" class="grid"></div>
       <div id="load-more" class="text-center py-4 hidden">
-        <button onclick="loadMorePosts()" class="load-more-btn">Load More</button>
+        <button class="load-more-btn">Load More</button>
       </div>
     </section>
   </main>
 
-  <!-- COMMENTS MODAL -->
+  <!-- Comments Modal -->
   <div class="comments-modal hidden" id="commentsModal">
     <div class="modal-content">
       <div class="flex justify-between items-center mb-4">
         <h3 id="comment-title">Comments</h3>
-        <button onclick="closeComments()" class="close-btn">×</button>
+        <button class="close-btn" aria-label="Close comments">×</button>
       </div>
       <div id="comments-list" class="mb-4">
         <p class="text-gray-500">No comments yet. Be the first!</p>
       </div>
       <form id="comment-form">
-        <textarea placeholder="Add your comment..." rows="3" class="w-full p-2 border rounded mb-2"></textarea>
+        <textarea placeholder="Add your comment..." rows="3" class="w-full p-2 border rounded mb-2" aria-label="Comment input"></textarea>
         <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Post Comment</button>
       </form>
     </div>
   </div>
 
-  <!-- SETTINGS MODAL -->
+  <!-- Settings Modal -->
   <div class="settings-modal hidden" id="settingsModal">
     <div class="modal-content">
       <div class="flex justify-between items-center mb-4">
         <h3>⚙️ Settings</h3>
-        <button onclick="closeSettings()" class="close-btn">×</button>
+        <button class="close-btn" aria-label="Close settings">×</button>
       </div>
       
       <div class="settings-section">
         <h4>👤 Account</h4>
-        <input type="text" id="loginUsername" placeholder="Username" class="w-full p-2 border rounded mb-2">
-        <input type="password" id="loginPassword" placeholder="Password" class="w-full p-2 border rounded mb-2">
-        <button onclick="handleLogin()" class="w-full bg-green-500 text-white p-2 rounded">Login</button>
+        <input type="text" id="loginUsername" placeholder="Username" class="w-full p-2 border rounded mb-2" aria-label="Username">
+        <input type="password" id="loginPassword" placeholder="Password" class="w-full p-2 border rounded mb-2" aria-label="Password">
+        <button class="w-full bg-green-500 text-white p-2 rounded">Login</button>
       </div>
       
       <div class="settings-section">
         <h4>🎨 Theme</h4>
-        <select onchange="setTheme(this.value)" class="w-full p-2 border rounded">
+        <select class="w-full p-2 border rounded" id="themeSelect" aria-label="Select theme">
           <option value="light">Light Mode</option>
           <option value="dark">Dark Mode</option>
           <option value="system">System Default</option>
@@ -265,7 +285,7 @@
       
       <div class="settings-section">
         <h4>🌐 Language</h4>
-        <select onchange="translateInterface(this.value)" class="w-full p-2 border rounded">
+        <select class="w-full p-2 border rounded" id="languageSelect" aria-label="Select language">
           <option value="en">English</option>
           <option value="hi">हिंदी</option>
         </select>
@@ -277,6 +297,25 @@
     © 2025 Horizon | All Rights Reserved
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(() => console.log('Service Worker Registered'))
+        .catch(err => console.error('Service Worker Error:', err));
+    }
+  </script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <!-- DOMPurify for Input Sanitization -->
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.1/dist/purify.min.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="api.js"></script>
 </body>
 </html>
