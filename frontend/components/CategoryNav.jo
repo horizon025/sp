@@ -1,9 +1,0 @@
-export default function CategoryNav({ onCategory }) {
-  return (
-    <div className="nav-row">
-      <button className="nav-btn" onClick={() => onCategory("News")}>News</button>
-      <button className="nav-btn" onClick={() => onCategory("Live")}>Live</button>
-      <button className="nav-btn" onClick={() => onCategory("Workshop")}>Workshop</button>
-    </div>
-  );
-}
