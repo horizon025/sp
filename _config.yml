@@ -1,0 +1,43 @@
+# साइट सेटिंग्स
+title: Horizon 
+description: यह मेरी Jekyll वेबसाइट है
+baseurl: "" # अगर आपकी साइट सब-डायरेक्टरी (जैसे /blog) में है, तो यहाँ सेट करें
+url: "https://github.com/horizon025/sp/new/main" # अपनी साइट का URL डालें
+
+# बिल्ड सेटिंग्स
+theme: jekyll-theme-primer
+destination: ./_site
+source: .
+markdown: kramdown
+
+# प्लगइन्स
+plugins:
+  - jekyll-github-metadata
+  - jekyll-seo-tag
+  - jekyll-coffeescript
+  - jekyll-commonmark-ghpages
+  - jekyll-gist
+  - jekyll-paginate
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-default-layout
+  - jekyll-titles-from-headings
+
+# GitHub Pages सेटिंग्स
+github:
+  is_project_page: false # अगर यह प्रोजेक्ट पेज है, तो true करें
+
+# पेजिनेशन सेटिंग्स (यदि ब्लॉग में पेजिनेशन चाहिए)
+paginate: 5
+paginate_path: "/blog/page:num/"
+
+# SEO सेटिंग्स
+seo:
+  type: Website
+
+# थीम सेटिंग्स (प्राइमर थीम के लिए)
+primer:
+  syntax_highlighter: rouge
+
+# exclude: [vendor] # वैकल्पिक: कुछ फ़ाइलों को बिल्ड से बाहर रखने के लिए
