@@ -485,3 +485,22 @@ async function fetchPosts(category, limit = 5) {
         ].slice(0, limit);
     }
 }
+function createPostCard(post) {
+    const card = document.createElement('div');
+    card.className = 'post-card';
+    card.innerHTML = `
+        <h3>${post.title}</h3>
+        ${post.image ? `<img src="${post.image}" alt="${post.title}" class="post-image">` : ''}
+        <p>${post.description}</p>
+        <div class="post-meta">
+            <span class="category-tag">${post.category}</span>
+            <span class="date">${post.date}</span>
+        </div>
+        <div class="post-actions">
+            <button class="like-btn">❤️ ${Math.floor(Math.random() * 100)}</button>
+            <button class="comment-btn">💬 Comment</button>
+        </div>
+    `;
+    // Like और Comment बटन लॉजिक (पिछला कोड वैसा ही रखें)
+    return card;
+}
