@@ -420,3 +420,68 @@ window.addEventListener('offline', () => {
     console.log('📴 Offline');
     alert('इंटरनेट कनेक्शन खो गया।');
 });
+async function fetchPosts(category, limit = 5) {
+    try {
+        const SHEET_ID = 'YOUR_SHEET_ID'; 1vQc5gEmSP4MUkM9tNft4G2HM4CGBLUjGaK1GgndIR16zOQvyRYm9ipZdNGhzw0FqR_I24btBnW9AkUW/pubhtml
+    try {
+        const SHEET_ID = 'YOUR_SHEET_ID'; 1vQc5gEmSP4MUkM9tNft4G2HM4CGBLUjGaK1GgndIR16zOQvyRYm9ipZdNGhzw0FqR_I24btBnW9AkUW/pubhtml// Sheets URL से ID डालें (उदाहरण: 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms)
+        const SHEET_NAME = 'Sheet1'; Horizon Posts
+        const csvUrl =https://docs.google.com/spreadsheets/d/e/2PACX-1vQc5gEmSP4MUkM9tNft4G2HM4CGBLUjGaK1GgndIR16zOQvyRYm9ipZdNGhzw0FqR_I24btBnW9AkUW/pubhtml`;
+        const response = await fetch(csvUrl);
+        if (!response.ok) throw new Error('Sheet data not loaded');
+        const csvText = await response.text();
+        const rows = csvText.split('\n').map(row => row.split(','));
+        const headers = rows[0]; // पहली पंक्ति हेडर
+        const posts = rows.slice(1).map(row => {
+            const obj = {};
+            headers.forEach((header, index) => {
+                obj[header] = row[index];
+            });
+            return obj;
+        }).filter(post => post.Category === category || category === 'Home').slice(0, limit);
+        return posts.map(post => ({
+            title: post.Title || 'ind vs pak Asiacup 2025',
+            description: post.Description || 'No description',
+            image: post['Image URL'] || 'https://picsum.photos/400/250?random=1',
+            category: post.Category || 'News',
+            date: post.Date || new Date().toLocaleDateString()
+        }));
+    } catch (error) {
+        console.error('Fetch posts error:', error);
+        // Mock data fallback
+        return [
+            { title: 'Breaking News', description: 'Something big happened!', category: category, date: '2025-09-27', image: 'https://picsum.photos/400/250?random=1' },
+            { title: 'Tech Update', description: 'New tech released!', category: category, date: '2025-09-26', image: 'https://picsum.photos/400/250?random=2' }
+        ].slice(0, limit);
+    }
+} Sheets URL से ID डालें (https://docs.google.com/spreadsheets/d/e/2PACX-1vQc5gEmSP4MUkM9tNft4G2HM4CGBLUjGaK1GgndIR16zOQvyRYm9ipZdNGhzw0FqR_I24btBnW9AkUW/pubhtml)
+        const SHEET_NAME = 'Sheet1'; // आपका शीट का नाम (डिफॉल्ट Sheet1)
+        const csvUrl = `https://docs.google.com/spreadsheets/d/e/2PACX-1vQc5gEmSP4MUkM9tNft4G2HM4CGBLUjGaK1GgndIR16zOQvyRYm9ipZdNGhzw0FqR_I24btBnW9AkUW/pubhtml  ;
+        const response = await fetch(csvUrl);
+        if (!response.ok) throw new Error('Sheet data not loaded');
+        const csvText = await response.text();
+        const rows = csvText.split('\n').map(row => row.split(','));
+        const headers = rows[0]; // पहली पंक्ति हेडर
+        const posts = rows.slice(1).map(row => {
+            const obj = {};
+            headers.forEach((header, index) => {
+                obj[header] = row[index];
+            });
+            return obj;
+        }).filter(post => post.Category === category || category === 'Home').slice(0, limit);
+        return posts.map(post => ({
+            title: post.Title || 'Untitled',
+            description: post.Description || 'No description',
+            image: post['Image URL'] || 'https://picsum.photos/400/250?random=1',
+            category: post.Category || 'News',
+            date: post.Date || new Date().toLocaleDateString()
+        }));
+    } catch (error) {
+        console.error('Fetch posts error:', error);
+        // Mock data fallback
+        return [
+            { title: 'Breaking News', description: 'Something big happened!', category: category, date: '2025-09-27', image: 'https://picsum.photos/400/250?random=1' },
+            { title: 'Tech Update', description: 'New tech released!', category: category, date: '2025-09-26', image: 'https://picsum.photos/400/250?random=2' }
+        ].slice(0, limit);
+    }
+}
