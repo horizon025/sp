@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Horizon News - Your source for the latest news, updates, and insights across various categories.">
-    <meta name="keywords" content="news, tech, sports, bollywood, health, politics">
+    <meta name="description" content="Horizon News - Your ultimate source for breaking news, updates, and insights across tech, sports, Bollywood, and more!">
+    <meta name="keywords" content="news, tech, sports, bollywood, health, politics, latest updates">
     <meta name="author" content="Horizon News Team">
     <meta property="og:title" content="Horizon News">
-    <meta property="og:description" content="Stay updated with the latest news and trends.">
+    <meta property="og:description" content="Stay ahead with the latest news and trends from around the world.">
     <meta property="og:image" content="/images/logo.png">
     <meta property="og:url" content="https://horizon025.github.io/sp/">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; img-src 'self' data:;">
-    <title>Horizon - News Platform</title>
+    <title>Horizon News - Stay Informed</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
@@ -29,20 +29,126 @@
     <div class="sidebar" id="sidebar" aria-label="Main navigation">
         <div class="sidebar-header">
             <img src="images/logo.png" alt="Horizon Logo" class="logo-svg">
-            <button class="sidebar-close-btn" aria-label="Close sidebar">×</button>
+            <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle sidebar content">☰</button>
         </div>
-
-        <nav class="sidebar-nav">
-            <!-- Existing nav groups here, same as before -->
+        <nav class="sidebar-nav" id="sidebarNav">
+            <!-- Nav Groups -->
             <div class="nav-group">
                 <div class="slide active" data-category="Home" role="button" aria-current="page">
                     <span class="nav-icon" aria-hidden="true">🏠</span>
                     <span class="nav-text">Home</span>
                 </div>
             </div>
-            <!-- ... (keep all other nav groups as in previous code) ... -->
+            <div class="nav-group">
+                <div class="slide" data-category="News" role="button">
+                    <span class="nav-icon" aria-hidden="true">📰</span>
+                    <span class="nav-text">News</span>
+                </div>
+            </div>
+            <div class="nav-group">
+                <div class="slide" data-toggle="study" role="button">
+                    <span class="nav-icon" aria-hidden="true">📚</span>
+                    <span class="nav-text">Study</span>
+                    <span class="expand-icon" aria-hidden="true">▶</span>
+                </div>
+                <div id="studyGroup" class="sub-group hidden">
+                    <div class="sub-slide" data-category="10thBoardHindi" role="button">
+                        <span class="nav-text">10th Board Hindi</span>
+                    </div>
+                    <div class="sub-slide" data-category="10thBoardEnglish" role="button">
+                        <span class="nav-text">10th Board English</span>
+                    </div>
+                    <div class="sub-slide" data-category="12thBoardHindi" role="button">
+                        <span class="nav-text">12th Board Hindi</span>
+                    </div>
+                    <div class="sub-slide" data-category="12thBoardEnglish" role="button">
+                        <span class="nav-text">12th Board English</span>
+                    </div>
+                    <div class="sub-slide" data-category="CompetitiveHindi" role="button">
+                        <span class="nav-text">Competitive Hindi</span>
+                    </div>
+                    <div class="sub-slide" data-category="CompetitiveEnglish" role="button">
+                        <span class="nav-text">Competitive English</span>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-group">
+                <div class="slide" data-toggle="workshop" role="button">
+                    <span class="nav-icon" aria-hidden="true">🔧</span>
+                    <span class="nav-text">Workshop</span>
+                    <span class="expand-icon" aria-hidden="true">▶</span>
+                </div>
+                <div id="workshopGroup" class="sub-group hidden">
+                    <div class="sub-slide" data-category="Cafe" role="button">
+                        <span class="nav-text">Cafe</span>
+                    </div>
+                    <div class="sub-slide" data-category="WebsiteBuilder" role="button">
+                        <span class="nav-text">Website Builder</span>
+                    </div>
+                    <div class="sub-slide" data-category="Editor" role="button">
+                        <span class="nav-text">Editor</span>
+                    </div>
+                    <div class="sub-slide" data-category="Designer" role="button">
+                        <span class="nav-text">Designer</span>
+                    </div>
+                    <div class="sub-slide" data-category="ContentCreator" role="button">
+                        <span class="nav-text">Content Creator</span>
+                    </div>
+                    <div class="sub-slide" data-category="Affiliate" role="button">
+                        <span class="nav-text">Affiliate</span>
+                    </div>
+                    <div class="sub-slide" data-category="Dropshipping" role="button">
+                        <span class="nav-text">Dropshipping</span>
+                    </div>
+                    <div class="sub-slide" data-category="Promotion" role="button">
+                        <span class="nav-text">Promotion</span>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-group">
+                <div class="slide" data-category="Tech" role="button">
+                    <span class="nav-icon" aria-hidden="true">🚀</span>
+                    <span class="nav-text">Tech</span>
+                </div>
+            </div>
+            <div class="nav-group">
+                <div class="slide" data-category="Bollywood" role="button">
+                    <span class="nav-icon" aria-hidden="true">🎬</span>
+                    <span class="nav-text">Bollywood</span>
+                </div>
+            </div>
+            <div class="nav-group">
+                <div class="slide" data-category="Sports" role="button">
+                    <span class="nav-icon" aria-hidden="true">⚽</span>
+                    <span class="nav-text">Sports</span>
+                </div>
+            </div>
+            <div class="nav-group">
+                <div class="slide" data-category="Stocks" role="button">
+                    <span class="nav-icon" aria-hidden="true">💹</span>
+                    <span class="nav-text">Stocks</span>
+                </div>
+            </div>
+            <div class="nav-group">
+                <div class="slide" data-category="Entertainment" role="button">
+                    <span class="nav-icon" aria-hidden="true">🎭</span>
+                    <span class="nav-text">Entertainment</span>
+                </div>
+            </div>
+            <div class="nav-group">
+                <div class="slide" data-category="Extra" role="button">
+                    <span class="nav-icon" aria-hidden="true">✨</span>
+                    <span class="nav-text">Extra</span>
+                </div>
+            </div>
+            <div class="nav-group">
+                <div class="slide" data-category="Contact" role="button">
+                    <span class="nav-icon" aria-hidden="true">📞</span>
+                    <span class="nav-text">Contact</span>
+                </div>
+            </div>
 
-            <!-- New Trending Widget in Sidebar -->
+            <!-- Trending Widget -->
             <div class="trending-widget">
                 <h4>Trending Now</h4>
                 <ul>
@@ -51,18 +157,19 @@
                     <li><a href="#trending3">Bollywood News</a></li>
                 </ul>
             </div>
-
             <div class="sidebar-footer">
-                <!-- Same as before -->
+                <p class="footer-text">© 2025 Horizon | All Rights Reserved</p>
             </div>
         </nav>
     </div>
 
     <main class="main-content" id="mainContent">
         <header class="header">
-            <div class="flex justify-between items-center mb-6">
-                <img src="images/logo.png" alt="Horizon Logo" class="logo-svg-small">
-                <div class="right-corner">
+            <div class="header-container flex flex-row justify-between items-center w-full">
+                <div class="header-left flex items-center">
+                    <img src="images/logo.png" alt="Horizon Logo" class="logo-svg-small">
+                </div>
+                <div class="header-right flex gap-4 items-center">
                     <button class="toggle-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
                     <select class="translate-btn" aria-label="Select language">
                         <option value="en">EN</option>
@@ -71,14 +178,10 @@
                     <button class="toggle-btn" id="settingsBtn" aria-label="Open settings">⚙️</button>
                 </div>
             </div>
-
-            <!-- Search Bar Moved to Top Center -->
-            <div class="search-container mb-4 text-center">
+            <div class="search-container w-full text-center">
                 <input type="text" class="search-bar" id="searchBar" placeholder="Search news..." aria-label="Search news">
             </div>
-
-            <!-- Blue Section Tabs Below Search -->
-            <div class="blue-section mb-6 text-center">
+            <div class="blue-section w-full text-center">
                 <span data-category="Trending">📈 Trending</span> | 
                 <span data-category="Videos">🎥 Videos</span> | 
                 <span data-category="Politics">🏛️ Politics</span> | 
@@ -87,6 +190,13 @@
                 <span data-category="Stocks">💹 Business</span> | 
                 <span data-category="Bollywood">🎬 Lifestyle</span> | 
                 <span data-category="More">⋮ More...</span>
+            </div>
+            <div class="latest-news-section w-full text-center">
+                <span data-category="LatestNews">📰 Latest News</span> | 
+                <span data-category="BreakingNews">🚨 Breaking News</span> | 
+                <span data-category="TopStories">⭐ Top Stories</span> | 
+                <span data-category="WorldNews">🌍 World News</span> | 
+                <span data-category="MoreNews">⋮ More News...</span>
             </div>
         </header>
 
@@ -99,7 +209,7 @@
         </section>
     </main>
 
-    <!-- Comments Modal (Added Username Display) -->
+    <!-- Comments Modal -->
     <div class="comments-modal hidden" id="commentsModal">
         <div class="modal-content">
             <div class="flex justify-between items-center mb-4">
@@ -116,13 +226,43 @@
         </div>
     </div>
 
-    <!-- Settings Modal (Same) -->
+    <!-- Settings Modal -->
     <div class="settings-modal hidden" id="settingsModal">
-        <!-- Same as before -->
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3>Settings</h3>
+                <button class="close-btn" aria-label="Close settings">×</button>
+            </div>
+            <div class="settings-section">
+                <h4>Login</h4>
+                <input type="text" id="loginUsername" placeholder="Username" aria-label="Username">
+                <input type="password" id="loginPassword" placeholder="Password" aria-label="Password">
+                <button id="loginBtn">Login</button>
+            </div>
+            <div class="settings-section">
+                <h4>Theme</h4>
+                <select id="themeSelect" aria-label="Select theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </div>
+            <div class="settings-section">
+                <h4>Newsletter</h4>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Enter your email" aria-label="Email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <footer class="footer">
-        © 2025 Horizon | All Rights Reserved
+        <div class="footer-content">
+            <p class="footer-text">© 2025 Horizon News | All Rights Reserved</p>
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Use</a> | <a href="#contact">Contact Us</a>
+            </div>
+        </div>
     </footer>
 
     <!-- Back to Top Button -->
