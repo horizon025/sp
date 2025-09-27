@@ -1,4 +1,4 @@
-console.log('🌅 Horizon Script Loading... at 10:42 PM IST, September 27, 2025');
+console.log('🌅 Horizon Script Loading... at 11:01 PM IST, September 27, 2025');
 
 let currentCategory = 'Home';
 let isDarkMode = false;
@@ -21,12 +21,16 @@ function initializeApp() {
 
 function setupEventListeners() {
     console.log('🔗 Setting up event listeners...');
-    document.getElementById('mobileMenuBtn').addEventListener('click', toggleSidebar);
-    document.querySelector('.sidebar-close-btn').addEventListener('click', toggleSidebar);
-    document.getElementById('sidebarToggleBtn').addEventListener('click', toggleSidebarContent);
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleSidebar);
+
+    const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+    if (sidebarToggleBtn) sidebarToggleBtn.addEventListener('click', toggleSidebarContent);
+
     document.querySelectorAll('.slide').forEach(slide => {
         if (slide.dataset.toggle) {
             slide.addEventListener('click', (e) => {
+                e.stopPropagation();
                 if (slide.dataset.toggle === 'study') toggleStudy(e);
                 if (slide.dataset.toggle === 'workshop') toggleWorkshop(e);
             });
@@ -34,19 +38,34 @@ function setupEventListeners() {
             slide.addEventListener('click', () => showCategory(slide.dataset.category));
         }
     });
+
     document.querySelectorAll('.sub-slide').forEach(slide => {
         slide.addEventListener('click', () => showCategory(slide.dataset.category));
     });
+
     document.querySelectorAll('.blue-section span, .latest-news-section span').forEach(tab => {
         tab.addEventListener('click', () => showCategory(tab.dataset.category));
     });
-    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-    document.getElementById('settingsBtn').addEventListener('click', openSettings);
+
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+
+    const settingsBtn = document.getElementById('settingsBtn');
+    if (settingsBtn) settingsBtn.addEventListener('click', openSettings);
+
     document.querySelectorAll('.close-btn').forEach(btn => btn.addEventListener('click', closeModals));
-    document.querySelector('.settings-section button').addEventListener('click', handleLogin);
-    document.getElementById('themeSelect').addEventListener('change', (e) => setTheme(e.target.value));
-    document.querySelector('.translate-btn').addEventListener('change', (e) => translateInterface(e.target.value));
-    document.getElementById('comment-form').addEventListener('submit', (e) => {
+
+    const loginBtn = document.querySelector('.settings-section button');
+    if (loginBtn) loginBtn.addEventListener('click', handleLogin);
+
+    const themeSelect = document.getElementById('themeSelect');
+    if (themeSelect) themeSelect.addEventListener('change', (e) => setTheme(e.target.value));
+
+    const translateBtn = document.querySelector('.translate-btn');
+    if (translateBtn) translateBtn.addEventListener('change', (e) => translateInterface(e.target.value));
+
+    const commentForm = document.getElementById('comment-form');
+    if (commentForm) commentForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const comment = e.target.querySelector('textarea').value.trim();
         const username = localStorage.getItem('username') || 'Guest';
@@ -60,7 +79,9 @@ function setupEventListeners() {
             console.log(`💬 Comment added by ${username}: ${comment}`);
         }
     });
-    document.getElementById('newsletter-form').addEventListener('submit', (e) => {
+
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) newsletterForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const email = e.target.querySelector('input').value.trim();
         if (email) {
@@ -69,20 +90,30 @@ function setupEventListeners() {
             e.target.reset();
         }
     });
-    document.getElementById('searchBar').addEventListener('input', searchPosts);
-    document.querySelector('.load-more-btn').addEventListener('click', loadMorePosts);
+
+    const searchBar = document.getElementById('searchBar');
+    if (searchBar) searchBar.addEventListener('input', searchPosts);
+
+    const loadMoreBtn = document.querySelector('.load-more-btn');
+    if (loadMoreBtn) loadMoreBtn.addEventListener('click', loadMorePosts);
+
     window.addEventListener('scroll', () => {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+        const backToTop = document.getElementById('backToTop');
+        if (backToTop) backToTop.style.display = (window.scrollY > 300) ? 'block' : 'none';
+        if (loadMoreBtn && window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
             loadMorePosts();
         }
-        document.getElementById('backToTop').style.display = (window.scrollY > 300) ? 'block' : 'none';
     });
-    document.getElementById('backToTop').addEventListener('click', () => {
+
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) backToTop.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModals();
     });
+
     console.log('✅ All event listeners attached successfully!');
 }
 
@@ -92,75 +123,101 @@ function toggleSidebar() {
     const mobileBtn = document.getElementById('mobileMenuBtn');
     const mainContent = document.getElementById('mainContent');
 
-    isSidebarOpen = !isSidebarOpen;
-    sidebar.classList.toggle('open', isSidebarOpen);
-    mobileBtn.classList.toggle('active', isSidebarOpen);
-    mainContent.classList.toggle('shifted', isSidebarOpen);
-    console.log(`📱 Sidebar ${isSidebarOpen ? 'opened' : 'closed'}`);
+    if (sidebar && mobileBtn && mainContent) {
+        isSidebarOpen = !isSidebarOpen;
+        sidebar.classList.toggle('open', isSidebarOpen);
+        mobileBtn.classList.toggle('active', isSidebarOpen);
+        mainContent.classList.toggle('shifted', isSidebarOpen);
+        console.log(`📱 Sidebar ${isSidebarOpen ? 'opened' : 'closed'}`);
+    }
 }
 
 function toggleSidebarContent() {
     console.log('☰ Sidebar content toggle clicked');
     const sidebarNav = document.getElementById('sidebarNav');
-    isSidebarContentVisible = !isSidebarContentVisible;
-    sidebarNav.classList.toggle('collapsed', !isSidebarContentVisible);
-    console.log(`📋 Sidebar content ${isSidebarContentVisible ? 'visible' : 'hidden'}`);
+    if (sidebarNav) {
+        isSidebarContentVisible = !isSidebarContentVisible;
+        sidebarNav.classList.toggle('collapsed', !isSidebarContentVisible);
+        console.log(`📋 Sidebar content ${isSidebarContentVisible ? 'visible' : 'hidden'}`);
+    }
 }
 
 function showCategory(category) {
     console.log(`🌐 Loading category: ${category}`);
     if (window.innerWidth < 768) toggleSidebar();
     currentCategory = category;
-    document.getElementById('page-title').textContent = `${category} - Latest Updates`;
+    const pageTitle = document.getElementById('page-title');
+    if (pageTitle) pageTitle.textContent = `${category} - Latest Updates`;
     updateActiveNavigation(category);
-    loadCategoryContent(category);
+    loadCategoryContent(category).catch(err => console.error('Error loading category:', err));
     closeModals();
     window.scrollTo({ top: 0, behavior: 'smooth' });
     console.log(`✅ ${category} loaded successfully`);
 }
 
 function updateActiveNavigation(category) {
-    document.querySelectorAll('.slide, .sub-slide, .blue-section span, .latest-news-section span').forEach(el => el.classList.remove('active'));
-    const activeSlide = document.querySelector(`[data-category="${category}"]`);
-    if (activeSlide) activeSlide.classList.add('active');
-    console.log(`🎯 Active nav updated: ${category}`);
+    const allSlides = document.querySelectorAll('.slide, .sub-slide, .blue-section span, .latest-news-section span');
+    if (allSlides) {
+        allSlides.forEach(el => el.classList.remove('active'));
+        const activeSlide = document.querySelector(`[data-category="${category}"]`);
+        if (activeSlide) activeSlide.classList.add('active');
+        console.log(`🎯 Active nav updated: ${category}`);
+    }
 }
 
 async function loadCategoryContent(category) {
     const container = document.getElementById('recent-posts');
-    container.innerHTML = '<div class="loading">Loading...</div>';
-    setTimeout(async () => {
-        const posts = await fetchPosts(category);
-        container.innerHTML = '';
-        posts.forEach(post => container.appendChild(createPostCard(post)));
-        document.getElementById('load-more').classList.remove('hidden');
-        console.log(`📄 Loaded ${posts.length} posts for ${category}`);
-    }, 800);
+    if (container) {
+        container.innerHTML = '<div class="loading">Loading...</div>';
+        try {
+            const posts = await fetchPosts(category);
+            container.innerHTML = '';
+            posts.forEach(post => {
+                const card = createPostCard(post);
+                if (card) container.appendChild(card);
+            });
+            const loadMore = document.getElementById('load-more');
+            if (loadMore) loadMore.classList.remove('hidden');
+            console.log(`📄 Loaded ${posts.length} posts for ${category}`);
+        } catch (err) {
+            container.innerHTML = '<div class="error">Failed to load content. Please try again.</div>';
+            console.error('Load content error:', err);
+        }
+    }
 }
 
 function createPostCard(post) {
     const card = document.createElement('div');
-    card.className = 'post-card';
-    card.innerHTML = `
-        <h3>${post.title}</h3>
-        <p>${post.description}</p>
-        <div class="post-meta">
-            <span class="category-tag">${post.category}</span>
-            <span class="date">${post.date}</span>
-        </div>
-        <div class="post-actions">
-            <button class="like-btn">❤️ ${Math.floor(Math.random() * 100)}</button>
-            <button class="comment-btn">💬 Comment</button>
-        </div>
-    `;
-    card.querySelector('.like-btn').addEventListener('click', (e) => {
-        const likes = parseInt(e.target.textContent.match(/\d+/)[0]) + 1;
-        e.target.textContent = `❤️ ${likes}`;
-        e.target.style.background = '#ff5252';
-        setTimeout(() => { e.target.style.background = ''; }, 200);
-    });
-    card.querySelector('.comment-btn').addEventListener('click', () => openComments(post.title));
-    return card;
+    if (card) {
+        card.className = 'post-card';
+        card.innerHTML = `
+            <h3>${post.title}</h3>
+            <p>${post.description}</p>
+            <div class="post-meta">
+                <span class="category-tag">${post.category}</span>
+                <span class="date">${post.date}</span>
+            </div>
+            <div class="post-actions">
+                <button class="like-btn">❤️ ${Math.floor(Math.random() * 100)}</button>
+                <button class="comment-btn">💬 Comment</button>
+            </div>
+        `;
+        const likeBtn = card.querySelector('.like-btn');
+        const commentBtn = card.querySelector('.comment-btn');
+        if (likeBtn) {
+            likeBtn.addEventListener('click', (e) => {
+                const likes = parseInt(e.target.textContent.match(/\d+/)[0]) + 1;
+                e.target.textContent = `❤️ ${likes}`;
+                e.target.style.background = '#ff5252';
+                setTimeout(() => { e.target.style.background = ''; }, 200);
+            });
+        }
+        if (commentBtn) {
+            commentBtn.addEventListener('click', () => openComments(post.title));
+        }
+        return card;
+    }
+    return null;
 }
 
 function toggleStudy(e) {
@@ -168,13 +225,17 @@ function toggleStudy(e) {
     console.log('📚 Study menu toggled');
     const studyGroup = document.getElementById('studyGroup');
     const expandIcon = e.currentTarget.querySelector('.expand-icon');
-    studyGroup.classList.toggle('hidden');
-    expandIcon.classList.toggle('rotated');
+    if (studyGroup && expandIcon) {
+        studyGroup.classList.toggle('hidden');
+        expandIcon.classList.toggle('rotated');
+    }
     const workshopGroup = document.getElementById('workshopGroup');
     if (workshopGroup && !workshopGroup.classList.contains('hidden')) {
         const workshopIcon = document.querySelector('[data-toggle="workshop"] .expand-icon');
-        workshopIcon.classList.remove('rotated');
-        workshopGroup.classList.add('hidden');
+        if (workshopIcon) {
+            workshopIcon.classList.remove('rotated');
+            workshopGroup.classList.add('hidden');
+        }
     }
 }
 
@@ -183,13 +244,17 @@ function toggleWorkshop(e) {
     console.log('🔧 Workshop menu toggled');
     const workshopGroup = document.getElementById('workshopGroup');
     const expandIcon = e.currentTarget.querySelector('.expand-icon');
-    workshopGroup.classList.toggle('hidden');
-    expandIcon.classList.toggle('rotated');
+    if (workshopGroup && expandIcon) {
+        workshopGroup.classList.toggle('hidden');
+        expandIcon.classList.toggle('rotated');
+    }
     const studyGroup = document.getElementById('studyGroup');
     if (studyGroup && !studyGroup.classList.contains('hidden')) {
         const studyIcon = document.querySelector('[data-toggle="study"] .expand-icon');
-        studyIcon.classList.remove('rotated');
-        studyGroup.classList.add('hidden');
+        if (studyIcon) {
+            studyIcon.classList.remove('rotated');
+            studyGroup.classList.add('hidden');
+        }
     }
 }
 
@@ -201,71 +266,99 @@ function toggleTheme() {
 
 function setTheme(theme) {
     isDarkMode = theme === 'dark';
-    document.body.classList.toggle('dark-theme', isDarkMode);
-    document.getElementById('themeToggle').textContent = isDarkMode ? '☀️ Light' : '🌙 Dark';
-    document.getElementById('themeSelect').value = theme;
+    const body = document.body;
+    if (body) body.classList.toggle('dark-theme', isDarkMode);
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) themeToggle.textContent = isDarkMode ? '☀️ Light' : '🌙 Dark';
+    const themeSelect = document.getElementById('themeSelect');
+    if (themeSelect) themeSelect.value = theme;
     localStorage.setItem('theme', theme);
     console.log(`🎨 Theme changed to: ${theme}`);
 }
 
 function openSettings() {
     console.log('⚙️ Settings opened');
-    document.getElementById('settingsModal').classList.add('show');
-    document.body.style.overflow = 'hidden';
+    const settingsModal = document.getElementById('settingsModal');
+    if (settingsModal) {
+        settingsModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function openComments(title) {
     console.log(`💬 Opening comments for: ${title}`);
-    document.getElementById('comment-title').textContent = `${title} - Comments`;
-    document.getElementById('commentsModal').classList.add('show');
-    document.body.style.overflow = 'hidden';
+    const commentsModal = document.getElementById('commentsModal');
+    const commentTitle = document.getElementById('comment-title');
+    if (commentsModal && commentTitle) {
+        commentTitle.textContent = `${title} - Comments`;
+        commentsModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function closeModals() {
     console.log('🔚 Closing modals');
-    document.querySelectorAll('.comments-modal, .settings-modal').forEach(modal => modal.classList.remove('show'));
-    document.body.style.overflow = 'auto';
+    const modals = document.querySelectorAll('.comments-modal, .settings-modal');
+    if (modals) {
+        modals.forEach(modal => modal.classList.remove('show'));
+        document.body.style.overflow = 'auto';
+    }
 }
 
 function handleLogin() {
-    const username = document.getElementById('loginUsername').value.trim();
-    const password = document.getElementById('loginPassword').value;
-    if (username && password) {
-        localStorage.setItem('username', username);
-        console.log(`👤 Login successful: ${username}`);
-        alert(`Welcome back, ${username}!`);
-        document.getElementById('loginBtn').textContent = `Hi ${username}`;
-        closeModals();
-    } else {
-        console.log('❌ Login failed');
-        alert('Please enter username and password');
+    const usernameInput = document.getElementById('loginUsername');
+    const passwordInput = document.getElementById('loginPassword');
+    const loginBtn = document.getElementById('loginBtn');
+    if (usernameInput && passwordInput && loginBtn) {
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value;
+        if (username && password) {
+            localStorage.setItem('username', username);
+            console.log(`👤 Login successful: ${username}`);
+            alert(`Welcome back, ${username}!`);
+            loginBtn.textContent = `Hi ${username}`;
+            closeModals();
+        } else {
+            console.log('❌ Login failed');
+            alert('Please enter username and password');
+        }
     }
 }
 
 function loadMorePosts() {
     console.log('📄 Loading more posts...');
     const btn = document.querySelector('.load-more-btn');
-    const originalText = btn.textContent;
-    btn.textContent = 'Loading...';
-    btn.disabled = true;
-    setTimeout(async () => {
-        const container = document.getElementById('recent-posts');
-        const newPosts = await fetchPosts(currentCategory, 3);
-        newPosts.forEach(post => container.appendChild(createPostCard(post)));
-        btn.textContent = originalText;
-        btn.disabled = false;
-        console.log(`➕ Added ${newPosts.length} more posts`);
-    }, 1500);
+    if (btn) {
+        const originalText = btn.textContent;
+        btn.textContent = 'Loading...';
+        btn.disabled = true;
+        setTimeout(async () => {
+            const container = document.getElementById('recent-posts');
+            if (container) {
+                const newPosts = await fetchPosts(currentCategory, 3);
+                newPosts.forEach(post => {
+                    const card = createPostCard(post);
+                    if (card) container.appendChild(card);
+                });
+                btn.textContent = originalText;
+                btn.disabled = false;
+                console.log(`➕ Added ${newPosts.length} more posts`);
+            }
+        }, 1500);
+    }
 }
 
 function searchPosts() {
     console.log('🔍 Searching...');
-    const query = document.getElementById('searchBar').value.toLowerCase().trim();
+    const searchBar = document.getElementById('searchBar');
     const posts = document.querySelectorAll('.post-card');
-    posts.forEach(post => {
-        const text = post.textContent.toLowerCase();
-        post.style.display = text.includes(query) ? 'block' : 'none';
-    });
+    if (searchBar && posts) {
+        const query = searchBar.value.toLowerCase().trim();
+        posts.forEach(post => {
+            const text = post.textContent.toLowerCase();
+            post.style.display = text.includes(query) ? 'block' : 'none';
+        });
+    }
 }
 
 function translateInterface(lang) {
@@ -275,17 +368,26 @@ function translateInterface(lang) {
         hi: { 'Home': 'होम', 'News': 'समाचार', 'Study': 'अध्ययन', 'Workshop': 'कार्यशाला', '10thBoardHindi': '10वीं बोर्ड हिंदी', '10thBoardEnglish': '10वीं बोर्ड अंग्रेजी', '12thBoardHindi': '12वीं बोर्ड हिंदी', '12thBoardEnglish': '12वीं बोर्ड अंग्रेजी', 'CompetitiveHindi': 'प्रतियोगी हिंदी', 'CompetitiveEnglish': 'प्रतियोगी अंग्रेजी', 'Cafe': 'कैफे', 'WebsiteBuilder': 'वेबसाइट बिल्डर', 'Editor': 'संपादक', 'Designer': 'डिज़ाइनर', 'ContentCreator': 'कंटेंट क्रिएटर', 'Affiliate': 'सहबद्ध', 'Dropshipping': 'ड्रॉपशिपिंग', 'Promotion': 'प्रचार', 'Tech': 'तकनीक', 'Bollywood': 'बॉलीवुड', 'Sports': 'खेल', 'Stocks': 'शेयर', 'Entertainment': 'मनोरंजन', 'Extra': 'अतिरिक्त', 'Contact': 'संपर्क', 'Trending': 'ट्रेंडिंग', 'Videos': 'वीडियो', 'Politics': 'राजनीति', 'Health': 'स्वास्थ्य', 'Search news...': 'समाचार खोजें...', 'Latest News': 'नवीनतम समाचार', 'Load More': 'और लोड करें', 'LatestNews': 'नवीनतम समाचार', 'BreakingNews': 'ताजा खबर', 'TopStories': 'शीर्ष कहानियाँ', 'WorldNews': 'विश्व समाचार', 'MoreNews': 'अधिक समाचार...' }
     };
     const currentLang = translations[lang] || translations.en;
-    document.querySelectorAll('.nav-text').forEach(el => {
-        const key = Object.keys(translations.en).find(k => translations.en[k] === el.textContent);
-        if (key && currentLang[key]) el.textContent = currentLang[key];
-    });
-    document.querySelectorAll('.blue-section span, .latest-news-section span').forEach(el => {
-        const key = Object.keys(translations.en).find(k => translations.en[k] === el.textContent);
-        if (key && currentLang[key]) el.textContent = currentLang[key];
-    });
-    document.getElementById('searchBar').placeholder = currentLang['Search news...'];
-    document.querySelector('.post-section h2').textContent = currentLang['Latest News'];
-    document.querySelector('.load-more-btn').textContent = currentLang['Load More'];
+    const navTexts = document.querySelectorAll('.nav-text');
+    if (navTexts) {
+        navTexts.forEach(el => {
+            const key = Object.keys(translations.en).find(k => translations.en[k] === el.textContent);
+            if (key && currentLang[key]) el.textContent = currentLang[key];
+        });
+    }
+    const tabs = document.querySelectorAll('.blue-section span, .latest-news-section span');
+    if (tabs) {
+        tabs.forEach(el => {
+            const key = Object.keys(translations.en).find(k => translations.en[k] === el.textContent);
+            if (key && currentLang[key]) el.textContent = currentLang[key];
+        });
+    }
+    const searchBar = document.getElementById('searchBar');
+    if (searchBar) searchBar.placeholder = currentLang['Search news...'];
+    const pageTitle = document.querySelector('.post-section h2');
+    if (pageTitle) pageTitle.textContent = currentLang['Latest News'];
+    const loadMoreBtn = document.querySelector('.load-more-btn');
+    if (loadMoreBtn) loadMoreBtn.textContent = currentLang['Load More'];
     localStorage.setItem('language', lang);
 }
 
@@ -302,13 +404,15 @@ function loadPreferences() {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
     const savedLang = localStorage.getItem('language') || 'en';
-    document.querySelector('.translate-btn').value = savedLang;
+    const translateBtn = document.querySelector('.translate-btn');
+    if (translateBtn) translateBtn.value = savedLang;
     translateInterface(savedLang);
 }
 
 window.addEventListener('error', (e) => {
     console.error('JavaScript Error:', e.error);
     alert('कुछ गलत हो गया। पेज रिफ्रेश करें।');
+    e.preventDefault(); // Prevent default alert spam
 });
 
 window.addEventListener('online', () => console.log('🌐 Online'));
