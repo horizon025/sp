@@ -1,43 +1,52 @@
 # साइट सेटिंग्स
-title: Horizon 
-description: यह मेरी Jekyll वेबसाइट है
-baseurl: "" # अगर आपकी साइट सब-डायरेक्टरी (जैसे /blog) में है, तो यहाँ सेट करें
-url: "https://github.com/horizon025/sp/new/main" # अपनी साइट का URL डालें
+title: Horizon News
+description: न्यूज़ और टेक अपडेट्स
+baseurl: "/sp"  # /sp सबडायरेक्टरी के लिए
+url: "https://horizon025.github.io"
+permalink: /:categories/:title/
 
 # बिल्ड सेटिंग्स
 theme: jekyll-theme-primer
-destination: ./_site
 source: .
+destination: ./_site
 markdown: kramdown
+future: true  # आज की तारीख वाली पोस्ट्स दिखाने के लिए
+exclude: [vendor, .github, README.md]
 
 # प्लगइन्स
 plugins:
-  - jekyll-github-metadata
-  - jekyll-seo-tag
-  - jekyll-coffeescript
-  - jekyll-commonmark-ghpages
-  - jekyll-gist
   - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
   - jekyll-relative-links
+  - jekyll-github-metadata
   - jekyll-optional-front-matter
   - jekyll-readme-index
   - jekyll-default-layout
   - jekyll-titles-from-headings
 
-# GitHub Pages सेटिंग्स
+# GitHub Pages
 github:
-  is_project_page: false # अगर यह प्रोजेक्ट पेज है, तो true करें
+  is_project_page: true
 
-# पेजिनेशन सेटिंग्स (यदि ब्लॉग में पेजिनेशन चाहिए)
+# पेजिनेशन
 paginate: 5
-paginate_path: "/blog/page:num/"
+paginate_path: "/sp/page:num/"
 
-# SEO सेटिंग्स
+# SEO
 seo:
   type: Website
 
-# थीम सेटिंग्स (प्राइमर थीम के लिए)
+# थीम सेटिंग्स
 primer:
   syntax_highlighter: rouge
 
-# exclude: [vendor] # वैकल्पिक: कुछ फ़ाइलों को बिल्ड से बाहर रखने के लिए
+# डिफ़ॉल्ट सेटिंग्स
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      published: true
