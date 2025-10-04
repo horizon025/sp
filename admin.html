@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon News - Admin Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+    <meta name="description" content="Horizon News Admin Dashboard for comment moderation">
+</head>
+<body class="dark-theme">
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <img src="/images/logo.png" alt="Horizon Logo" class="logo-svg-small">
+                <h1>Admin Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <button id="logoutBtn" class="toggle-btn">Logout</button>
+            </div>
+        </div>
+    </header>
+    <main class="main-content">
+        <section class="admin-section">
+            <h2>Comment Moderation</h2>
+            <div id="admin-comments" class="grid"></div>
+        </section>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAdminComments();
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('username');
+                window.location.href = '/index.html';
+            });
+        });
+
+        async function loadAdminComments() {
+            const container = document.getElementById('admin-comments');
+            container.innerHTML = '<div class="loading">Loading comments...</div>';
+            try {
+                const response = await fetch('/api/admin/comments', {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+                if (!response.ok) throw new Error('Failed to fetch comments');
+                const comments = await response.json();
+                container.innerHTML = '';
+                comments.forEach(comment => {
+                    const div = document.createElement('div');
+                    div.className = 'post-card';
+                    div.innerHTML = `
+                        <p><strong>${comment.username}</strong>: ${comment.comment}</p>
+                        <p class="comment-time">${new Date(comment.date).toLocaleString()}</p>
+                        <p>Status: ${comment.approved ? 'Approved' : 'Pending'}</p>
+                        ${!comment.approved ? `<button onclick="approveComment('${comment._id}')">Approve</button>` : ''}
+                    `;
+                    container.appendChild(div);
+                });
+            } catch (error) {
+                container.innerHTML = '<div class="error">Failed to load comments.</div>';
+                console.error('Load admin comments error:', error);
+            }
+        }
+
+        async function approveComment(id) {
+            try {
+                const response = await fetch(`/api/admin/comments/${id}/approve`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+                if (!response.ok) throw new Error('Failed to approve comment');
+                loadAdminComments();
+                console.log(`✅ Comment ${id} approved`);
+            } catch (error) {
+                alert('Error approving comment');
+                console.error('Approve comment error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
