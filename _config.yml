@@ -1,52 +1,39 @@
-# साइट सेटिंग्स
 title: Horizon News
-description: न्यूज़ और टेक अपडेट्स
-baseurl: "/sp"  # /sp सबडायरेक्टरी के लिए
+description: Latest news and updates across tech, sports, Bollywood, and more.
+baseurl: "/sp"
 url: "https://horizon025.github.io"
 permalink: /:categories/:title/
 
-# बिल्ड सेटिंग्स
 theme: jekyll-theme-primer
 source: .
 destination: ./_site
 markdown: kramdown
-future: true  # आज की तारीख वाली पोस्ट्स दिखाने के लिए
+future: true
 exclude: [vendor, .github, README.md]
 
-# प्लगइन्स
 plugins:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-relative-links
-  - jekyll-github-metadata
-  - jekyll-optional-front-matter
-  - jekyll-readme-index
-  - jekyll-default-layout
-  - jekyll-titles-from-headings
+    - jekyll-paginate
+    - jekyll-sitemap
+    - jekyll-feed
+    - jekyll-seo-tag
+    - jekyll-relative-links
 
-# GitHub Pages
 github:
-  is_project_page: true
+    is_project_page: true
 
-# पेजिनेशन
 paginate: 5
 paginate_path: "/sp/page:num/"
 
-# SEO
 seo:
-  type: Website
+    type: Website
 
-# थीम सेटिंग्स
 primer:
-  syntax_highlighter: rouge
+    syntax_highlighter: rouge
 
-# डिफ़ॉल्ट सेटिंग्स
 defaults:
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: post
-      published: true
+    - scope:
+        path: ""
+        type: posts
+      values:
+        layout: post
+        published: true
