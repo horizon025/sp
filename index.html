@@ -10,12 +10,41 @@
     <meta property="og:description" content="Stay ahead with the latest news and trends from around the world.">
     <meta property="og:image" content="/images/logo.png">
     <meta property="og:url" content="https://horizon025.github.io/sp/">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; img-src 'self' data:;">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://apis.google.com https://www.google-analytics.com https://cdn.onesignal.com; style-src 'self' https://fonts.googleapis.com; img-src 'self' data: https://*.ibb.co https://i.ytimg.com; connect-src 'self' https://newsapi.org https://api.horizon-news.com https://www.googleapis.com;">
     <title>Horizon News - Stay Informed</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/favicon.ico">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR_GA_ID');
+    </script>
+    <!-- OneSignal for Push Notifications -->
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+        window.OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+            OneSignal.init({
+                appId: "YOUR_ONESIGNAL_APP_ID",
+            });
+        });
+    </script>
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsMediaOrganization",
+        "name": "Horizon News",
+        "url": "https://horizon025.github.io/sp/",
+        "logo": "https://horizon025.github.io/sp/images/logo.png"
+    }
+    </script>
 </head>
 <body>
     <!-- Mobile Menu Toggle -->
@@ -28,11 +57,10 @@
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar" aria-label="Main navigation">
         <div class="sidebar-header">
-            <img src="images/logo.png" alt="Horizon Logo" class="logo-svg">
+            <img src="/images/logo.png" alt="Horizon Logo" class="logo-svg">
             <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle sidebar content">☰</button>
         </div>
         <nav class="sidebar-nav" id="sidebarNav">
-            <!-- Nav Groups -->
             <div class="nav-group">
                 <div class="slide active" data-category="Home" role="button" aria-current="page">
                     <span class="nav-icon" aria-hidden="true">🏠</span>
@@ -147,41 +175,41 @@
                     <span class="nav-text">Contact</span>
                 </div>
             </div>
-
-            <!-- Trending Widget -->
             <div class="trending-widget">
                 <h4>Trending Now</h4>
-                <ul>
-                    <li><a href="#trending1">India Elections Update</a></li>
-                    <li><a href="#trending2">Tech Breakthroughs</a></li>
-                    <li><a href="#trending3">Bollywood News</a></li>
+                <ul id="trending-list">
+                    <li><a href="#trending1">Loading...</a></li>
                 </ul>
             </div>
             <div class="sidebar-footer">
-                <p class="footer-text">© 2025 Horizon | All Rights Reserved</p>
+                <p class="footer-text">© 2025 Horizon News | All Rights Reserved</p>
             </div>
         </nav>
     </div>
 
     <main class="main-content" id="mainContent">
         <header class="header">
-            <div class="header-container flex flex-row justify-between items-center w-full">
-                <div class="header-left flex items-center">
-                    <img src="images/logo.png" alt="Horizon Logo" class="logo-svg-small">
+            <div class="header-container">
+                <div class="header-left">
+                    <img src="/images/logo.png" alt="Horizon Logo" class="logo-svg-small">
                 </div>
-                <div class="header-right flex gap-4 items-center">
-                    <button class="toggle-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+                <div class="header-right">
                     <select class="translate-btn" aria-label="Select language">
                         <option value="en">EN</option>
                         <option value="hi">हिं</option>
                     </select>
+                    <button class="toggle-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
                     <button class="toggle-btn" id="settingsBtn" aria-label="Open settings">⚙️</button>
                 </div>
             </div>
-            <div class="search-container w-full text-center">
+            <div class="search-container">
                 <input type="text" class="search-bar" id="searchBar" placeholder="Search news..." aria-label="Search news">
             </div>
-            <div class="blue-section w-full text-center">
+            <div class="live-ticker">
+                <span class="ticker-label">Breaking News:</span>
+                <div class="ticker-content" id="liveTicker">Loading live updates...</div>
+            </div>
+            <div class="blue-section">
                 <span data-category="Trending">📈 Trending</span> | 
                 <span data-category="Videos">🎥 Videos</span> | 
                 <span data-category="Politics">🏛️ Politics</span> | 
@@ -191,19 +219,28 @@
                 <span data-category="Bollywood">🎬 Lifestyle</span> | 
                 <span data-category="More">⋮ More...</span>
             </div>
-            <div class="latest-news-section w-full text-center">
+            <div class="latest-news-section">
                 <span data-category="LatestNews">📰 Latest News</span> | 
                 <span data-category="BreakingNews">🚨 Breaking News</span> | 
                 <span data-category="TopStories">⭐ Top Stories</span> | 
                 <span data-category="WorldNews">🌍 World News</span> | 
                 <span data-category="MoreNews">⋮ More News...</span>
             </div>
+            <section class="recent-posts-section">
+                <h2>Recent Posts</h2>
+                <div id="recent-posts" class="grid"></div>
+            </section>
         </header>
 
+        <section class="video-section" id="videoSection">
+            <h2>Videos</h2>
+            <div id="video-grid" class="grid"></div>
+        </section>
+
         <section class="post-section">
-            <h2 class="text-2xl font-bold mb-4" id="page-title">Latest News</h2>
-            <div id="recent-posts" class="grid"></div>
-            <div id="load-more" class="text-center py-4 hidden">
+            <h2 id="page-title">Latest News</h2>
+            <div id="category-posts" class="grid"></div>
+            <div id="load-more" class="text-center py-4">
                 <button class="load-more-btn">Load More</button>
             </div>
         </section>
@@ -216,9 +253,7 @@
                 <h3 id="comment-title">Comments</h3>
                 <button class="close-btn" aria-label="Close comments">×</button>
             </div>
-            <div id="comments-list" class="mb-4">
-                <p class="text-gray-500">No comments yet. Be the first!</p>
-            </div>
+            <div id="comments-list" class="mb-4"></div>
             <form id="comment-form">
                 <textarea placeholder="Add your comment..." rows="3" class="w-full p-2 border rounded mb-2" aria-label="Comment input"></textarea>
                 <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Post Comment</button>
@@ -238,6 +273,7 @@
                 <input type="text" id="loginUsername" placeholder="Username" aria-label="Username">
                 <input type="password" id="loginPassword" placeholder="Password" aria-label="Password">
                 <button id="loginBtn">Login</button>
+                <button id="registerBtn">Register</button>
             </div>
             <div class="settings-section">
                 <h4>Theme</h4>
@@ -260,14 +296,15 @@
         <div class="footer-content">
             <p class="footer-text">© 2025 Horizon News | All Rights Reserved</p>
             <div class="footer-links">
-                <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Use</a> | <a href="#contact">Contact Us</a>
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#terms">Terms of Use</a> | 
+                <a href="#contact">Contact Us</a>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
     <button id="backToTop" aria-label="Back to top">↑</button>
 
-    <script src="script.js"></script>
+    <script src="/script.js"></script>
 </body>
 </html>
